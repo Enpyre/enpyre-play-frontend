@@ -4,7 +4,8 @@ type Response<T> = [T, Dispatch<SetStateAction<T>>];
 
 export const usePersistedState = <T>(key: string, initial: T): Response<T> => {
   const [state, setState] = useState(() => {
-    const storageValue = localStorage.getItem(key);
+    const storageValue =
+      typeof window !== 'undefined' ? window.localStorage.getItem(key) : false;
 
     if (storageValue) return JSON.parse(storageValue);
 

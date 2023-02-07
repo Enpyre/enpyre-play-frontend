@@ -48,6 +48,7 @@ export const theme = {
       d850: '#23232B',
       d900: '#201E26',
       d950: '#1b2334',
+      d975: '#151F2C',
     },
     shades: {
       white: '#ffffff',

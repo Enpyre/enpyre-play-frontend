@@ -1,21 +1,23 @@
 import { KEYS } from '@/constants/keys';
 import { AuthService } from '@/view/environments/public/services/auth';
-import { createContext, useCallback, useState } from 'react';
+import { parseCookies, setCookie } from 'nookies';
+import { createContext, useCallback, useEffect, useState } from 'react';
+import { authServices } from './services';
 
-import { AuthContextData, ContextUser, Props } from './types';
+import {
+  AuthContextData,
+  ContextUser,
+  Props,
+  TokenAndRefresh,
+  UserResponse,
+} from './types';
 
 export const AuthContext = createContext<AuthContextData>(
   {} as AuthContextData,
 );
 
 export const AuthProvider = ({ children }: Props) => {
-  const [user, setUser] = useState<ContextUser | null>(() => {
-    const user =
-      typeof window !== 'undefined'
-        ? window.localStorage.getItem(KEYS.STORAGE.USER)
-        : false;
-    return user ? JSON.parse(user) : null;
-  });
+  const [user, setUser] = useState<UserResponse | null>(null);
 
   const signIn = useCallback(async (user: ContextUser) => {
     try {
@@ -27,9 +29,15 @@ export const AuthProvider = ({ children }: Props) => {
       if (result.error) {
         throw new Error(result.msgError);
       }
-
-      localStorage.setItem(KEYS.STORAGE.USER, JSON.stringify(result.data));
-      setUser(result.data);
+      setCookie(
+        undefined,
+        KEYS.STORAGE.USER_TOKEN,
+        JSON.stringify(result.data),
+        {
+          maxAge: 60 * 60 * 1, // 1 hour
+          path: '/',
+        },
+      );
 
       return result;
     } catch (err) {
@@ -43,10 +51,32 @@ export const AuthProvider = ({ children }: Props) => {
   }, []);
 
   const signOut = async (): Promise<void> => {
-    localStorage.removeItem(KEYS.STORAGE.USER);
+    localStorage.removeItem(KEYS.STORAGE.USER_TOKEN);
     setUser(null);
   };
 
+  const userData = useCallback(async () => {
+    const cookies = parseCookies()[KEYS.STORAGE.USER_TOKEN];
+
+    if (!cookies) return;
+
+    const { token }: TokenAndRefresh = JSON.parse(cookies);
+
+    if (!token) return signOut();
+
+    const { data, error } = await authServices.getDataProfile({
+      signOut,
+      token,
+    });
+
+    if (error) return signOut();
+
+    if (data) setUser(data);
+  }, []);
+
+  useEffect(() => {
+    userData();
+  }, []);
   return (
     <AuthContext.Provider
       value={{

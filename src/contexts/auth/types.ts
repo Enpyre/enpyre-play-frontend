@@ -1,3 +1,4 @@
+import { ToFuncRequest } from '@/hooks/to-request';
 import { ResponseSignIn } from '@/view/environments/public/services/auth/types';
 import { Dispatch, ReactNode, SetStateAction } from 'react';
 
@@ -7,19 +8,32 @@ export type Props = {
   children: ReactNode;
 };
 
+export type TokenAndRefresh = {
+  token: string;
+  refresh: string;
+};
+
 export type ContextUser = {
   id?: string;
   code?: string;
   provider?: string;
-  token?: string;
-  refresh?: string;
+  token?: TokenAndRefresh['token'];
+  refresh?: TokenAndRefresh['refresh'];
+};
+
+export type UserResponse = {
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+  picture: string;
 };
 
 export type AuthContextData = {
   logged: boolean;
   signOut: () => void;
-  user: ContextUser | null;
-  setUser: Dispatch<SetStateAction<ContextUser | null>>;
+  user: UserResponse | null;
+  setUser: Dispatch<SetStateAction<UserResponse | null>>;
   signIn: (user: ContextUser) => Promise<
     | HttpResponse<ResponseSignIn>
     | {
@@ -29,3 +43,10 @@ export type AuthContextData = {
       }
   >;
 };
+
+export interface IAuthServices {
+  getDataProfile: ({
+    signOut,
+    token,
+  }: ToFuncRequest) => Promise<HttpResponse<UserResponse>>;
+}

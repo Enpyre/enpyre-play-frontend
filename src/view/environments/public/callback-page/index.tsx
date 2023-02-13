@@ -9,10 +9,9 @@ export const CallbackPage = () => {
   const { signIn } = useAuth();
 
   const responseSignIn = useCallback(async () => {
-    let errors = '';
     if (router.isReady)
       try {
-        const { data, error, msgError } = await signIn({
+        const { error, msgError } = await signIn({
           code: code as string,
           provider: 'github',
         });
@@ -20,14 +19,12 @@ export const CallbackPage = () => {
         if (error) {
           throw new Error(msgError);
         }
-        console.log('entrou', data);
+
         router.push('/en');
       } catch (err) {
         if (err instanceof Error) {
-          errors = err.message;
+          throw new Error(err.message);
         }
-      } finally {
-        // router.push('/');
       }
   }, [router.isReady]);
 

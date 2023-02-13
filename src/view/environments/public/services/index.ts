@@ -11,7 +11,7 @@ export const uau = () => {
 //       host: KEYS.HOST.API_URL,
 //       path: `/service`,
 //       headers: {
-//         Authorization: `Token ${token}`,
+//         Authorization: `Bearer ${token}`,
 //       },
 //       validations: {
 //         codeSuccess: 200,

@@ -15,7 +15,6 @@ export const AuthContext = createContext<AuthContextData>(
 
 export const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useState<UserResponse | null>(null);
-  const isFirstRender = useRef(true);
   const router = useRouter();
   const { refreshToken, accessToken } = useCookies();
 
@@ -54,23 +53,17 @@ export const AuthProvider = ({ children }: Props) => {
     router.push('/');
   };
   const userData = useCallback(async () => {
-    if (!isFirstRender.current && router.asPath !== '/' && refreshToken) {
-      const { data, error } = await authServices.getDataProfile({
-        signOut,
-      });
+    const { data, error } = await authServices.getDataProfile({
+      signOut,
+    });
 
-      if (error) return;
+    if (error) return;
 
-      if (data) setUser(data);
-    }
+    if (data) setUser(data);
   }, [router.asPath, accessToken]);
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-    if (!isFirstRender.current && router.asPath !== '/' && refreshToken) {
+    if (router.asPath !== '/' && refreshToken) {
       userData();
     }
   }, [router.asPath, refreshToken]);

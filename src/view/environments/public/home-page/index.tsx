@@ -1,12 +1,4 @@
 import { CodeEditor } from '@/view/components/svg/code-editor';
-import Modal from '@/view/components/ui/modal';
-import { BodyAlert } from '@/view/components/ui/modal/body-alert';
-import { useToModal } from '@/view/components/ui/modal/hooks/use-to-modal';
-import {
-  onActionModalType,
-  OptionsModalType,
-} from '@/view/components/ui/modal/types';
-import { useCallback, useEffect, useState } from 'react';
 import { Header } from '../layout/header';
 import * as S from './styles';
 

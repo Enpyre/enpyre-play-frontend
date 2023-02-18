@@ -1,16 +1,13 @@
 import { KEYS } from '@/constants/keys';
+import { useCookies } from '@/hooks/use-cookies';
+import { createJWTCookie } from '@/utils';
 import { AuthService } from '@/view/environments/public/services/auth';
-import { parseCookies, setCookie } from 'nookies';
-import { createContext, useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { destroyCookie, parseCookies, setCookie } from 'nookies';
+import { createContext, useCallback, useEffect, useRef, useState } from 'react';
 import { authServices } from './services';
 
-import {
-  AuthContextData,
-  ContextUser,
-  Props,
-  TokenAndRefresh,
-  UserResponse,
-} from './types';
+import { AuthContextData, ContextUser, Props, UserResponse } from './types';
 
 export const AuthContext = createContext<AuthContextData>(
   {} as AuthContextData,
@@ -18,6 +15,9 @@ export const AuthContext = createContext<AuthContextData>(
 
 export const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useState<UserResponse | null>(null);
+  const isFirstRender = useRef(true);
+  const router = useRouter();
+  const { refreshToken, accessToken } = useCookies();
 
   const signIn = useCallback(async (user: ContextUser) => {
     try {
@@ -29,15 +29,12 @@ export const AuthProvider = ({ children }: Props) => {
       if (result.error) {
         throw new Error(result.msgError);
       }
-      setCookie(
-        undefined,
-        KEYS.STORAGE.USER_TOKEN,
-        JSON.stringify(result.data),
-        {
-          maxAge: 60 * 60 * 1, // 1 hour
-          path: '/',
-        },
-      );
+
+      // create cookie by access_token
+      createJWTCookie(result.data.token, KEYS.STORAGE.USER_ACCESS_TOKEN);
+
+      // create cookie by refresh_token
+      createJWTCookie(result.data.refresh, KEYS.STORAGE.USER_REFRESH_TOKEN);
 
       return result;
     } catch (err) {
@@ -51,32 +48,32 @@ export const AuthProvider = ({ children }: Props) => {
   }, []);
 
   const signOut = async (): Promise<void> => {
-    localStorage.removeItem(KEYS.STORAGE.USER_TOKEN);
+    destroyCookie(undefined, KEYS.STORAGE.USER_ACCESS_TOKEN);
+    destroyCookie(undefined, KEYS.STORAGE.USER_REFRESH_TOKEN);
     setUser(null);
+    router.push('/');
   };
-
   const userData = useCallback(async () => {
-    const cookies = parseCookies()[KEYS.STORAGE.USER_TOKEN];
+    if (!isFirstRender.current && router.asPath !== '/' && refreshToken) {
+      const { data, error } = await authServices.getDataProfile({
+        signOut,
+      });
 
-    if (!cookies) return;
+      if (error) return;
 
-    const { token }: TokenAndRefresh = JSON.parse(cookies);
-
-    if (!token) return signOut();
-
-    const { data, error } = await authServices.getDataProfile({
-      signOut,
-      token,
-    });
-
-    if (error) return signOut();
-
-    if (data) setUser(data);
-  }, []);
+      if (data) setUser(data);
+    }
+  }, [router.asPath, accessToken]);
 
   useEffect(() => {
-    userData();
-  }, []);
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    if (!isFirstRender.current && router.asPath !== '/' && refreshToken) {
+      userData();
+    }
+  }, [router.asPath, refreshToken]);
   return (
     <AuthContext.Provider
       value={{

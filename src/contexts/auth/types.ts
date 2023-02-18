@@ -13,6 +13,11 @@ export type TokenAndRefresh = {
   refresh: string;
 };
 
+export type RefreshTokenResponse = {
+  access: string;
+  refresh: string;
+};
+
 export type ContextUser = {
   id?: string;
   code?: string;
@@ -47,6 +52,9 @@ export type AuthContextData = {
 export interface IAuthServices {
   getDataProfile: ({
     signOut,
-    token,
   }: ToFuncRequest) => Promise<HttpResponse<UserResponse>>;
+
+  getRefreshToken: (
+    refreshToken: string,
+  ) => Promise<HttpResponse<RefreshTokenResponse>>;
 }

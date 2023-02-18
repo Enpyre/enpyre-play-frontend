@@ -1,8 +1,14 @@
+import { KEYS } from '@/constants/keys';
+import { authServices } from '@/contexts/auth/services';
+import { useAuth } from '@/hooks/auth';
+import { useCookies } from '@/hooks/use-cookies';
+import { createJWTCookie } from '@/utils';
 import axios, {
   AxiosRequestConfig,
   AxiosRequestHeaders,
   AxiosResponse,
 } from 'axios';
+import { parseCookies } from 'nookies';
 
 import { HttpDefaultHeaders, HttpParamsRequest, HttpResponse } from '../http';
 import { CUSTOM_HEADERS } from './constants';
@@ -27,6 +33,10 @@ export const client = (
 
   instance.interceptors.request.use(
     async (config) => {
+      const { accessToken } = useCookies();
+      if (accessToken && config.headers) {
+        config.headers['Authorization'] = `Bearer ${accessToken}`;
+      }
       return config;
     },
     (error) => {
@@ -34,8 +44,31 @@ export const client = (
     },
   );
 
-  instance.interceptors.response.use(undefined, (err) => {
+  instance.interceptors.response.use(undefined, async (err) => {
     if (err.response) {
+      if (err.response.status === 401 && !err.config._retry) {
+        err.config._retry = true;
+
+        try {
+          const refreshToken = parseCookies()[KEYS.STORAGE.USER_REFRESH_TOKEN];
+
+          const { data, error } = await authServices.getRefreshToken(
+            refreshToken,
+          );
+
+          if (!error) {
+            // create cookie by access_token
+            createJWTCookie(data.access, KEYS.STORAGE.USER_ACCESS_TOKEN);
+
+            // create cookie by refresh_token
+            createJWTCookie(data.refresh, KEYS.STORAGE.USER_REFRESH_TOKEN);
+
+            return instance(err.config);
+          }
+        } catch (error) {
+          return Promise.reject(error);
+        }
+      }
       return err.response;
     }
 
@@ -84,7 +117,7 @@ export const core = async <T>(
     result.data = response.data;
   } catch (err) {
     result.error = true;
-    result.code = response.status || 500;
+    result.code = response?.status || 500;
     result.msgError = !(err as Error).message
       ? validations?.msgError
       : (err as Error).message;

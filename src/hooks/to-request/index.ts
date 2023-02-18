@@ -2,11 +2,10 @@ import { useAuth } from '../auth';
 import { ToFuncRequest } from './types';
 
 export const useToRequest: () => ToFuncRequest = () => {
-  const { user, signOut } = useAuth();
+  const { signOut } = useAuth();
 
   return {
     signOut,
-    token: user?.token,
   };
 };
 

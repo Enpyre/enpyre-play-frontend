@@ -1,4 +1,7 @@
 export type ToFuncRequest = {
   signOut: () => void;
-  token?: string | null;
+};
+
+export type ToRequestWithoutRevalidate = {
+  signOut: () => void;
 };

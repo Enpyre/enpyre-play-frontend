@@ -13,3 +13,13 @@ export const createJWTCookie = (token: string, key: string, path?: string) => {
     path: path ?? '/',
   });
 };
+
+type ConvertFontType = {
+  toRem: (value: number) => string;
+};
+
+export const convertFont: ConvertFontType = {
+  toRem: (value: number) => {
+    return `${value / 16}rem`;
+  },
+};

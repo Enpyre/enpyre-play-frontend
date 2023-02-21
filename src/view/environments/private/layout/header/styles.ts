@@ -2,8 +2,10 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.header`
   width: 100%;
-  height: 79px;
-  padding: 16px;
+  height: 60px;
+  padding: 8px 16px;
+  background: ${({ theme }) => theme.colors.primary.p800};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.primary.p700};
 
   display: flex;
   flex-direction: row;
@@ -17,8 +19,8 @@ export const Wrapper = styled.header`
 `;
 
 export const Logo = styled.i`
-  width: 140px;
-  height: 47px;
+  width: 100px;
+  height: 32px;
   background-size: cover;
   background-image: url('/logo.png');
 

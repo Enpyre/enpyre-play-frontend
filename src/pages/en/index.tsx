@@ -1,18 +1,21 @@
 import { useAuth } from '@/hooks/auth';
 import { useCookies } from '@/hooks/use-cookies';
+import { EnPage } from '@/view/environments/private/en-page';
 import { GetServerSideProps } from 'next';
+import Head from 'next/head';
 import { useEffect } from 'react';
 
 export default function InitialEn() {
   const { user } = useAuth();
-
   useEffect(() => {
     console.log('valor interno -> ', user);
   }, [user]);
   return (
     <>
-      <p>você entrouu!!!</p>
-      <pre>{JSON.stringify(user, 0, 2)}</pre>
+      <Head>
+        <title>Hora de codar | Enpyre</title>
+      </Head>
+      <EnPage />
     </>
   );
 }

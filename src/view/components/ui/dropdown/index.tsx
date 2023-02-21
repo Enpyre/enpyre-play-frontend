@@ -4,14 +4,12 @@ import { Fragment, useCallback, useEffect, useRef, useState } from 'react';
 import * as S from './styles';
 
 export type ItemsDropdownProps = {
-  id: number | string;
   name: string | React.ReactNode;
   to?: string;
   variant?: 'normal' | 'outline' | string;
   onClick?: React.MouseEventHandler;
 };
 export type DropdownProps = {
-  id: number | string;
   name: string | React.ReactNode;
   isSelected?: boolean;
   noUppercase?: boolean;
@@ -21,7 +19,6 @@ export type DropdownProps = {
 };
 
 export const Dropdown = ({
-  id,
   name,
   items,
   position,
@@ -52,11 +49,13 @@ export const Dropdown = ({
       isSelected={!!isSelected}
       ref={refComponent}
       variant={variant ?? 'normal'}>
-      <button onClick={() => handleToggle()}>{name}</button>
+      <button onClick={() => handleToggle()}>
+        {name} <CaretDown />
+      </button>
       {isOpen && (
-        <S.Menu key={id} position={position} noUppercase={noUppercase}>
-          {items.map((item) => (
-            <Fragment key={item.id}>
+        <S.Menu position={position} noUppercase={noUppercase}>
+          {items.map((item, index) => (
+            <Fragment key={index}>
               <li className={item.variant ?? ''}>
                 {item.onClick !== undefined && (
                   <button onClick={item.onClick}>{item.name}</button>

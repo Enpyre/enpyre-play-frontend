@@ -5,6 +5,9 @@ const nextConfig = {
     // Enables the styled-components SWC transform
     styledComponents: true,
   },
+  images: {
+    domains: ['avatars.githubusercontent.com'],
+  },
   async rewrites() {
     return [
       {

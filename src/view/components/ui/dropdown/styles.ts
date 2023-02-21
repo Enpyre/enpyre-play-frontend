@@ -24,6 +24,8 @@ export const Wrapper = styled.li<{
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    gap: 4px;
+
     padding: 0px 12px;
 
     border: none;
@@ -70,7 +72,7 @@ export const Menu = styled.ul<{
     }
   }
 
-  background: ${({ theme }) => theme.colors.dark.d950};
+  background: ${({ theme }) => theme.colors.primary.p900};
 
   position: absolute;
   top: 50px;
@@ -105,7 +107,7 @@ export const Menu = styled.ul<{
 
   &::before {
     content: '';
-    border: 10px solid ${({ theme }) => theme.colors.dark.d950};
+    border: 10px solid ${({ theme }) => theme.colors.primary.p900};
     border-top: 5px solid transparent;
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
@@ -184,9 +186,9 @@ export const Menu = styled.ul<{
       }
       & > button {
         width: auto;
-        padding: 10px 26px;
+        padding: 8px 26px;
 
-        background: #e52d72;
+        background: ${({ theme }) => theme.colors.primary.p700};
         border-radius: 24px;
         border: 0;
 

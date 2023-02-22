@@ -12,7 +12,7 @@ export const EnPage = () => {
     height: 300,
   });
   const getHeight =
-    typeof window !== 'undefined' ? window.innerHeight / 200 - 0.4 : 1;
+    typeof window !== 'undefined' ? (window.innerHeight - 130) / 200 : 1;
   const getWidth =
     typeof window !== 'undefined' ? window.innerWidth / 200 - 0.4 : 1;
   const getFullWidth = typeof window !== 'undefined' ? window.innerWidth : 1;

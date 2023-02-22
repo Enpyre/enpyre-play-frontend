@@ -72,7 +72,7 @@ export const Menu = styled.ul<{
     }
   }
 
-  background: ${({ theme }) => theme.colors.primary.p900};
+  background: ${({ theme }) => theme.colors.dark.d950};
 
   position: absolute;
   top: 50px;
@@ -107,7 +107,7 @@ export const Menu = styled.ul<{
 
   &::before {
     content: '';
-    border: 10px solid ${({ theme }) => theme.colors.primary.p900};
+    border: 10px solid ${({ theme }) => theme.colors.dark.d950};
     border-top: 5px solid transparent;
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
@@ -138,7 +138,7 @@ export const Menu = styled.ul<{
     padding: 15px;
     border-left: 2px solid transparent;
     transition: 0.3s;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.primary.p800};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.dark.d800};
     position: relative;
 
     &:hover {

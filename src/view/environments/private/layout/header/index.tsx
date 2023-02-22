@@ -5,7 +5,9 @@ export const Header = () => {
   return (
     <>
       <S.Wrapper>
-        <S.Logo />
+        <Link href="/">
+          <S.Logo />
+        </Link>
         <S.Actions>
           <ol>
             <li className="primary">

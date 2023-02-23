@@ -1,4 +1,13 @@
-import { EnpyreDisplay, EnpyreEditor, EnpyreProvider } from 'enpyre';
+import {
+  EnpyreDisplay,
+  EnpyreEditor,
+  EnpyreProvider,
+  useCode,
+  usePyodide,
+} from 'enpyre';
+import { useEffect } from 'react';
+
+import { code } from '@/view/components/ui/code/code';
 
 import * as S from './styles';
 
@@ -19,9 +28,19 @@ const Instructions = () => (
 );
 
 const CodeEditor = () => {
+  const { runCode, pyodideLoaded } = usePyodide();
+  const { setCode } = useCode();
+
+  useEffect(() => {
+    setCode(code);
+  }, [setCode]);
+
   return (
     <S.Card gridRow="span 2">
       <EnpyreEditor />
+      <button onClick={runCode} disabled={!pyodideLoaded}>
+        Executar
+      </button>
     </S.Card>
   );
 };

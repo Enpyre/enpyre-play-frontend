@@ -1,5 +1,6 @@
 import { CodeEditor } from '@/view/components/svg/code-editor';
 import { Header } from '../layout/header';
+import { Carousel } from './components/carousel';
 import * as S from './styles';
 
 export const HomePage = () => {
@@ -21,6 +22,7 @@ export const HomePage = () => {
             <CodeEditor />
           </S.Right>
         </S.Hero>
+        <Carousel />
       </S.Main>
     </>
   );

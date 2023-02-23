@@ -11,23 +11,26 @@ export const Header = () => {
       <S.Wrapper>
         <S.Logo />
         <S.Actions>
-          <ol>
-            {isLogged && (
-              <li className="primary">
+          {isLogged && (
+            <>
+              <li>
                 <Link href="/en/projects">Ver projetos</Link>
               </li>
-            )}
-            {!isLogged && (
-              <>
-                <li>
-                  <button onClick={() => setIsOpen(true)}>Entrar</button>
-                </li>
-                <li className="primary">
-                  <button onClick={() => setIsOpen(true)}>Cadastrar</button>
-                </li>
-              </>
-            )}
-          </ol>
+              <li className="primary">
+                <Link href="/en">Codar</Link>
+              </li>
+            </>
+          )}
+          {!isLogged && (
+            <>
+              <li>
+                <button onClick={() => setIsOpen(true)}>Entrar</button>
+              </li>
+              <li className="primary">
+                <button onClick={() => setIsOpen(true)}>Cadastrar</button>
+              </li>
+            </>
+          )}
         </S.Actions>
       </S.Wrapper>
       <ModalSign isOpen={isOpen} callbackClose={() => setIsOpen(false)} />

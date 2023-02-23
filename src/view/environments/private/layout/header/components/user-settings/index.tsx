@@ -1,7 +1,6 @@
 import { useAuth } from '@/hooks/auth';
 import { Item, ItemsProps } from '@/view/components/ui/item';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
 
 import * as S from './styles';
@@ -12,7 +11,6 @@ import * as S from './styles';
 export const UserSettings = () => {
   const { user, signOut } = useAuth();
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   const handleSignOut = useCallback(async () => {
     try {

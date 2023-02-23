@@ -4,8 +4,8 @@ export const Wrapper = styled.header`
   width: 100%;
   height: 60px;
   padding: 8px 16px;
-  background: ${({ theme }) => theme.colors.primary.p800};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.primary.p700};
+  background: ${({ theme }) => theme.colors.primary.p900};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.dark.d950};
 
   display: flex;
   flex-direction: row;

@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const Wrapper = styled.section`
   width: 100%;
   height: 100%;
-  margin-top: 60px;
+  padding-top: 60px;
+  background: ${({ theme }) => theme.colors.gradient.primary};
 
   & > .layout-grid {
     width: 100vw;

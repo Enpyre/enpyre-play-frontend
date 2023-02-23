@@ -9,10 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@monaco-editor/react": "^4.4.6",
     "@next/font": "13.1.4",
     "@types/axios": "^0.14.0",
     "axios": "^0.27.2",
+    "enpyre": "^0.0.13",
     "jwt-decode": "^3.1.2",
     "next": "13.1.4",
     "nookies": "^2.5.2",

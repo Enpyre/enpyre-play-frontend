@@ -12,14 +12,15 @@ export const Body = styled.div`
 
 export const GridLayout = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 800px 1fr;
+  grid-template-rows: 500px 1fr;
   gap: 1rem;
 `;
 
 export const Card = styled.div<CardProps>`
   background: white;
   padding: 1rem;
+  overflow: hidden;
 
   ${({ gridRow }) =>
     gridRow
@@ -34,4 +35,12 @@ export const Card = styled.div<CardProps>`
           grid-column: ${gridColumn};
         `
       : null}
+`;
+
+export const Space = styled.div`
+  display: flex;
+  flex-direction: column;
+  & > * {
+    margin-top: 1.5rem;
+  }
 `;

@@ -4,7 +4,8 @@ from enpyre import Enpyre
 enpyre = Enpyre()
 
 enpyre.x = enpyre.y = START_X = START_Y = 0
-BOARD_WIDTH = BOARD_HEIGHT = 600
+BOARD_WIDTH = 800
+BOARD_HEIGHT = 500
 
 
 def draw_cherry(x, y):

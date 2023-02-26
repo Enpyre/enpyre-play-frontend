@@ -1,7 +1,8 @@
-import { KEYS } from '@/constants/keys';
 import { GetServerSidePropsContext, PreviewData } from 'next';
 import { parseCookies } from 'nookies';
 import { ParsedUrlQuery } from 'querystring';
+
+import { KEYS } from '@/constants/keys';
 
 export const useCookies = (
   value?: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>,

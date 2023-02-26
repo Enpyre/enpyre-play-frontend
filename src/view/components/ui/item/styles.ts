@@ -1,5 +1,6 @@
-import { convertFont } from '@/utils';
 import styled, { css } from 'styled-components';
+
+import { convertFont } from '@/utils';
 
 export const Wrapper = styled.li<{ isSelected?: boolean }>`
   color: ${({ theme }) => theme.colors.shades.white};

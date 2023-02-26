@@ -1,6 +1,8 @@
-import { useCookies } from '@/hooks/use-cookies';
 import Link from 'next/link';
 import { useState } from 'react';
+
+import { useCookies } from '@/hooks/use-cookies';
+
 import { ModalSign } from './components/modal-sign';
 import * as S from './styles';
 export const Header = () => {

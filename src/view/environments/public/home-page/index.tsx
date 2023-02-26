@@ -1,4 +1,7 @@
+import Link from 'next/link';
+
 import { CodeEditor } from '@/view/components/svg/code-editor';
+
 import { Header } from '../layout/header';
 import { Carousel } from './components/carousel';
 import * as S from './styles';
@@ -16,7 +19,7 @@ export const HomePage = () => {
                 you can build and run your projects from anywhere in the world.
               </h3>
             </div>
-            <a href="/en">Partiu codar</a>
+            <Link href="/en">Partiu codar</Link>
           </S.Left>
           <S.Right>
             <CodeEditor />

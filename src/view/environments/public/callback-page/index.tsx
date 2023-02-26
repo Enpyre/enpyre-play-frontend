@@ -1,7 +1,8 @@
-import { useAuth } from '@/hooks/auth';
-import Loading from '@/view/components/loading';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
+
+import { useAuth } from '@/hooks/auth';
+import Loading from '@/view/components/loading';
 
 export const CallbackPage = () => {
   const router = useRouter();

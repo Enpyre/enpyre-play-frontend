@@ -1,5 +1,6 @@
 import { KEYS } from '@/constants/keys';
 import { HttpClient, HttpResponse } from '@/infra/http';
+
 import { ResponseSignIn, SignInParams, SignInResult } from './types';
 
 export const AuthService = {

@@ -1,6 +1,7 @@
 import { KEYS } from '@/constants/keys';
 import { ToFuncRequest } from '@/hooks/to-request';
 import { HttpClient } from '@/infra/http';
+
 import { IAuthServices } from './types';
 
 export const authServices: IAuthServices = {

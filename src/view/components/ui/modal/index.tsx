@@ -8,8 +8,8 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Button } from '../button';
 
+import { Button } from '../button';
 import { BodyAlert } from './body-alert';
 import {
   Background,

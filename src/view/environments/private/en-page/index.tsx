@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
-import GridLayout from 'react-grid-layout';
-import { Header } from '../layout/header';
-import * as S from './styles';
 import '/node_modules/react-grid-layout/css/styles.css';
 import '/node_modules/react-resizable/css/styles.css';
+
+import { useEffect, useState } from 'react';
+import GridLayout from 'react-grid-layout';
+
+import { Header } from '../layout/header';
+import * as S from './styles';
 
 export const EnPage = () => {
   const [windowDimensions, setWindowDimensions] = useState({

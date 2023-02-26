@@ -1,9 +1,10 @@
-import { useAuth } from '@/hooks/auth';
-import { useCookies } from '@/hooks/use-cookies';
-import { EnPage } from '@/view/environments/private/en-page';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useEffect } from 'react';
+
+import { useAuth } from '@/hooks/auth';
+import { useCookies } from '@/hooks/use-cookies';
+import { EnPage } from '@/view/environments/private/en-page';
 
 export default function InitialEn() {
   const { user } = useAuth();
@@ -21,6 +22,7 @@ export default function InitialEn() {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { isLogged } = useCookies(ctx);
   if (!isLogged) {
     return {

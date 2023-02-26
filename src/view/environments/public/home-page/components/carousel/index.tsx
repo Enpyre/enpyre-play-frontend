@@ -1,5 +1,6 @@
-import React from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
+import React from 'react';
+
 import * as S from './styles';
 
 export const Carousel = () => {

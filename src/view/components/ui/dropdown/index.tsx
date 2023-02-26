@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { CaretDown } from 'phosphor-react';
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react';
+
 import * as S from './styles';
 
 export type ItemsDropdownProps = {

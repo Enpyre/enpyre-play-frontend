@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+
 import { ModalHandles, PropsModal } from '../types';
 
 export const useToModal = (initial: PropsModal) => {

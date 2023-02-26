@@ -1,7 +1,8 @@
-import { useAuth } from '@/hooks/auth';
-import { Item, ItemsProps } from '@/view/components/ui/item';
 import Image from 'next/image';
 import { useCallback, useState } from 'react';
+
+import { useAuth } from '@/hooks/auth';
+import { Item, ItemsProps } from '@/view/components/ui/item';
 
 import * as S from './styles';
 

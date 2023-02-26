@@ -1,6 +1,7 @@
+import { Dispatch, ReactNode, SetStateAction } from 'react';
+
 import { ToFuncRequest } from '@/hooks/to-request';
 import { ResponseSignIn } from '@/view/environments/public/services/auth/types';
-import { Dispatch, ReactNode, SetStateAction } from 'react';
 
 import { HttpResponse } from '../../infra/http';
 

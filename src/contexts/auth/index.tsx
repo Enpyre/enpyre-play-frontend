@@ -1,12 +1,13 @@
+import { useRouter } from 'next/router';
+import { destroyCookie, parseCookies, setCookie } from 'nookies';
+import { createContext, useCallback, useEffect, useRef, useState } from 'react';
+
 import { KEYS } from '@/constants/keys';
 import { useCookies } from '@/hooks/use-cookies';
 import { createJWTCookie } from '@/utils';
 import { AuthService } from '@/view/environments/public/services/auth';
-import { useRouter } from 'next/router';
-import { destroyCookie, parseCookies, setCookie } from 'nookies';
-import { createContext, useCallback, useEffect, useRef, useState } from 'react';
-import { authServices } from './services';
 
+import { authServices } from './services';
 import { AuthContextData, ContextUser, Props, UserResponse } from './types';
 
 export const AuthContext = createContext<AuthContextData>(

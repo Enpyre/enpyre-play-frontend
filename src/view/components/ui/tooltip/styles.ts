@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import { animation } from '../../styles/constants';
 
+import { animation } from '../../styles/constants';
 import { Props } from './types';
 
 type WrapperProps = {

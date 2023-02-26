@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import { UserSettings } from './components/user-settings';
 import * as S from './styles';
 export const Header = () => {

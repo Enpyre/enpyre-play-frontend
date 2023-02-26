@@ -1,14 +1,15 @@
-import { KEYS } from '@/constants/keys';
-import { authServices } from '@/contexts/auth/services';
-import { useAuth } from '@/hooks/auth';
-import { useCookies } from '@/hooks/use-cookies';
-import { createJWTCookie } from '@/utils';
 import axios, {
   AxiosRequestConfig,
   AxiosRequestHeaders,
   AxiosResponse,
 } from 'axios';
 import { parseCookies } from 'nookies';
+
+import { KEYS } from '@/constants/keys';
+import { authServices } from '@/contexts/auth/services';
+import { useAuth } from '@/hooks/auth';
+import { useCookies } from '@/hooks/use-cookies';
+import { createJWTCookie } from '@/utils';
 
 import { HttpDefaultHeaders, HttpParamsRequest, HttpResponse } from '../http';
 import { CUSTOM_HEADERS } from './constants';

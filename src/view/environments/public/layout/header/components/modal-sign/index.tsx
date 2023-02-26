@@ -1,7 +1,9 @@
-import { GitHubHeader } from '@/view/components/svg/github-header';
 import Link from 'next/link';
 import { GithubLogo, X } from 'phosphor-react';
 import { useEffect, useRef, useState } from 'react';
+
+import { GitHubHeader } from '@/view/components/svg/github-header';
+
 import * as S from './styles';
 
 type Props = {

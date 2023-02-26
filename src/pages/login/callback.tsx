@@ -1,5 +1,6 @@
-import { CallbackPage } from '@/view/environments/public/callback-page';
 import Head from 'next/head';
+
+import { CallbackPage } from '@/view/environments/public/callback-page';
 
 export default function Callback() {
   return (

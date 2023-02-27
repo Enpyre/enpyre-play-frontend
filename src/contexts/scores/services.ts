@@ -13,8 +13,8 @@ export const scoreService: IScoreServices = {
         codeSuccess: 200,
         msgError: 'Aconteceu algum problema para buscar os dados do usuário',
         others: (status) => {
-          if (status === 400 && signOut) {
-            console.log('entrou no signout do dataProfile');
+          if (status === 401 && signOut) {
+            console.log('entrou no signout do listAllScores');
             signOut();
             return;
           }
@@ -31,8 +31,8 @@ export const scoreService: IScoreServices = {
         codeSuccess: 200,
         msgError: 'Aconteceu algum problema para buscar os dados do usuário',
         others: (status) => {
-          if (status === 400 && signOut) {
-            console.log('entrou no signout do dataProfile');
+          if (status === 401 && signOut) {
+            console.log('entrou no signout do listWeeklyScores');
             signOut();
             return;
           }
@@ -49,8 +49,8 @@ export const scoreService: IScoreServices = {
         codeSuccess: 200,
         msgError: 'Aconteceu algum problema para buscar os dados do usuário',
         others: (status) => {
-          if (status === 400 && signOut) {
-            console.log('entrou no signout do dataProfile');
+          if (status === 401 && signOut) {
+            console.log('entrou no signout do listMonthlyScores');
             signOut();
             return;
           }
@@ -67,8 +67,8 @@ export const scoreService: IScoreServices = {
         codeSuccess: 200,
         msgError: 'Aconteceu algum problema para buscar os dados do usuário',
         others: (status) => {
-          if (status === 400 && signOut) {
-            console.log('entrou no signout do dataProfile');
+          if (status === 401 && signOut) {
+            console.log('entrou no signout do listYearlyScores');
             signOut();
             return;
           }
@@ -85,8 +85,8 @@ export const scoreService: IScoreServices = {
         codeSuccess: 200,
         msgError: 'Aconteceu algum problema para buscar os dados do usuário',
         others: (status) => {
-          if (status === 400 && signOut) {
-            console.log('entrou no signout do dataProfile');
+          if (status === 401 && signOut) {
+            console.log('entrou no signout do listGlobalScores');
             signOut();
             return;
           }

@@ -54,10 +54,9 @@ export type ScoreContextData = {
 };
 
 export interface IScoreServices {
-  listAllScores: (
-    { signOut }: ToFuncRequest,
-    score_type?: string,
-  ) => Promise<HttpResponse<AllScoresResponse>>;
+  listAllScores: ({
+    signOut,
+  }: ToFuncRequest) => Promise<HttpResponse<AllScoresResponse>>;
 
   listWeeklyScores: ({
     signOut,

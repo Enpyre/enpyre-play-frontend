@@ -1127,8 +1127,10 @@ enhanced-resolve@^5.10.0:
     graceful-fs "^4.2.4"
     tapable "^2.2.0"
 
-"enpyre@file:./../enpyre/":
-  version "0.0.13"
+enpyre@^0.0.14:
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/enpyre/-/enpyre-0.0.14.tgz#40d4f2f88a6b7322c510181883752b8b221f4010"
+  integrity sha512-0/NCYeBr54AKa0Og3x0vWv67V+Ctty6iIfKdTiRzAxdkFWmSWxccEAjn41HgQTHeEmOl1GnD46aq2W9NVCBCPg==
   dependencies:
     "@pixi/sound" "^4.2.0"
     pixi.js "^6.3.2"

@@ -32,7 +32,7 @@ export type ProjectResponse = {
 export type ProjectContextData = {
   projects: ProjectResponse | null;
   project: Project | null;
-  fetchProjects: ({ signOut }: ToFuncRequest) => Promise<void>;
+  fetchProjects: () => Promise<void>;
   fetchProject: (id: number, shared_link?: string) => Promise<void>;
   createProject: (project: Project) => Promise<void>;
   updateProject: (project: Project) => Promise<void>;

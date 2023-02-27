@@ -13,8 +13,9 @@ import Text from '@/view/components/ui/Text';
 import * as S from './styles';
 
 const Instructions = () => (
-  <S.Card gridRow="span 2">
+  <S.Card dark gridRowStart={2} gridRowEnd={4}>
     <S.Space>
+      <S.CardTitle>Instruções</S.CardTitle>
       <Text>Lorem ipsum dolor sit amet</Text>
       <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Text>
       <Text>Nullam ac metus neque</Text>
@@ -53,26 +54,38 @@ const CodeEditor = () => {
     setCode(code);
   }, [setCode]);
 
+  const editorProps = {
+    width: '100%',
+    fontSize: 20,
+    height: '100%',
+  };
+
   return (
-    <S.Card gridRow="span 2">
-      <EnpyreEditor />
-      <button onClick={runCode} disabled={!pyodideLoaded}>
-        Executar
-      </button>
+    <S.Card dark gridRowStart={1} gridRowEnd={3}>
+      <S.Space>
+        <EnpyreEditor editorProps={editorProps} />
+        <S.Button onClick={runCode} disabled={!pyodideLoaded}>
+          Executar
+        </S.Button>
+      </S.Space>
     </S.Card>
   );
 };
 
 const Display = () => {
   return (
-    <S.Card>
+    <S.Card gridColumnStart={1} gridRowStart={1}>
       <EnpyreDisplay />
     </S.Card>
   );
 };
 
 const Output = () => {
-  return <S.Card />;
+  return (
+    <S.Card dark gridRowStart={3} gridColumnStart={2}>
+      <S.CardTitle>Saída</S.CardTitle>
+    </S.Card>
+  );
 };
 
 export function CodePage() {
@@ -80,9 +93,9 @@ export function CodePage() {
     <S.Body>
       <EnpyreProvider>
         <S.GridLayout>
+          <Instructions />
           <Display />
           <CodeEditor />
-          <Instructions />
           <Output />
         </S.GridLayout>
       </EnpyreProvider>

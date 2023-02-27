@@ -126,6 +126,9 @@ export const theme = {
       w800: '#92400E',
       w900: '#78350F',
     },
+    dracula: '#282a36',
+    action: '#f2bb13',
+    dim: '#838891',
   },
 };
 

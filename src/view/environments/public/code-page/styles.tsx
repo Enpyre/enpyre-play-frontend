@@ -1,8 +1,13 @@
 import styled, { css } from 'styled-components';
 
+import { theme } from '@/helpers/theme';
+
 interface CardProps {
-  gridRow?: string;
-  gridColumn?: string;
+  gridRowStart?: number;
+  gridRowEnd?: number;
+  gridColumnStart?: number;
+  gridColumnEnd?: number;
+  dark?: boolean;
 }
 
 export const Body = styled.div`
@@ -12,9 +17,14 @@ export const Body = styled.div`
 
 export const GridLayout = styled.div`
   display: grid;
-  grid-template-columns: 800px 1fr;
-  grid-template-rows: 500px 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(400px, 1fr) 400px 800px 400px;
   gap: 1rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 800px minmax(800px, 1fr);
+    grid-template-rows: 400px 250px 300px;
+  }
 `;
 
 export const Card = styled.div<CardProps>`
@@ -22,25 +32,44 @@ export const Card = styled.div<CardProps>`
   padding: 1rem;
   overflow: hidden;
 
-  ${({ gridRow }) =>
-    gridRow
-      ? css`
-          grid-row: ${gridRow};
-        `
-      : null}
+  ${({ dark }) =>
+    dark &&
+    css`
+      background: ${theme.colors.dracula};
+      color: white;
+    `};
 
-  ${({ gridColumn }) =>
-    gridColumn
-      ? css`
-          grid-column: ${gridColumn};
-        `
-      : null}
+  @media (min-width: 768px) {
+    ${({ gridRowStart, gridRowEnd, gridColumnStart, gridColumnEnd }) =>
+      css`
+        ${gridRowStart && `grid-row-start: ${gridRowStart};`}
+        ${gridRowEnd && `grid-row-end: ${gridRowEnd};`}
+        ${gridColumnStart && `grid-column-start: ${gridColumnStart};`}
+        ${gridColumnEnd && `grid-column-end: ${gridColumnEnd};`}
+      `}
+  }
 `;
 
 export const Space = styled.div`
+  height: 100%;
   display: flex;
   flex-direction: column;
-  & > * {
+  & > *:not(:first-child) {
     margin-top: 1.5rem;
   }
+`;
+
+export const Button = styled.button`
+  background: #464d56;
+  color: ${theme.colors.action};
+  height: 3rem;
+  width: 100%;
+  cursor: pointer;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 600;
+`;
+
+export const CardTitle = styled.h2`
+  color: ${theme.colors.dim};
 `;

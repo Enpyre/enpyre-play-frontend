@@ -14,6 +14,7 @@ interface CardProps {
 export const Body = styled.div`
   width: 100%;
   padding: 1rem;
+  padding-top: 70px;
 `;
 
 export const GridLayout = styled.div`

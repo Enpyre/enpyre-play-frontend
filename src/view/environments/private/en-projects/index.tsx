@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import { code } from '@/view/components/ui/code/code';
 import Text from '@/view/components/ui/Text';
 
+import { Header } from '../layout/header';
 import * as S from './styles';
 
 const Instructions = () => (
@@ -98,15 +99,18 @@ const Output = () => {
 
 export function EnProjects() {
   return (
-    <S.Body>
-      <EnpyreProvider>
-        <S.GridLayout>
-          <Instructions />
-          <Display />
-          <CodeEditor />
-          <Output />
-        </S.GridLayout>
-      </EnpyreProvider>
-    </S.Body>
+    <>
+      <Header />
+      <S.Body>
+        <EnpyreProvider>
+          <S.GridLayout>
+            <Instructions />
+            <Display />
+            <CodeEditor />
+            <Output />
+          </S.GridLayout>
+        </EnpyreProvider>
+      </S.Body>
+    </>
   );
 }

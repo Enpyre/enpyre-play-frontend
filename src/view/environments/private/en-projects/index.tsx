@@ -3,6 +3,7 @@ import {
   EnpyreEditor,
   EnpyreProvider,
   useCode,
+  useOutput,
   usePyodide,
 } from 'enpyre';
 import { useEffect } from 'react';
@@ -81,14 +82,21 @@ const Display = () => {
 };
 
 const Output = () => {
+  const { output } = useOutput();
+
   return (
     <S.Card dark gridRowStart={3} gridColumnStart={2}>
       <S.CardTitle>Saída</S.CardTitle>
+      <S.Scrollable>
+        {output.map((msg, index) => (
+          <pre key={index}>{msg}</pre>
+        ))}
+      </S.Scrollable>
     </S.Card>
   );
 };
 
-export function CodePage() {
+export function EnProjects() {
   return (
     <S.Body>
       <EnpyreProvider>

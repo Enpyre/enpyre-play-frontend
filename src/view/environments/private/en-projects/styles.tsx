@@ -8,6 +8,7 @@ interface CardProps {
   gridColumnStart?: number;
   gridColumnEnd?: number;
   dark?: boolean;
+  scroll?: boolean;
 }
 
 export const Body = styled.div`
@@ -31,6 +32,14 @@ export const Card = styled.div<CardProps>`
   background: white;
   padding: 1rem;
   overflow: hidden;
+
+  ${({ scroll }) => {
+    return scroll
+      ? css`
+          overflow: scroll;
+        `
+      : null;
+  }}
 
   ${({ dark }) =>
     dark &&
@@ -72,4 +81,11 @@ export const Button = styled.button`
 
 export const CardTitle = styled.h2`
   color: ${theme.colors.dim};
+`;
+
+export const Scrollable = styled.div`
+  overflow: scroll;
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
 `;

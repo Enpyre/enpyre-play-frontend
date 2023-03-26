@@ -462,9 +462,9 @@
   integrity sha512-cOODlDuToO3uixgDRHlsxGbzlgZKNyZn+AeZKHyo6z8JpLh5mYrC4wEgLyHoKSOX0VgNzlSY6VNLthmgpu2gAg==
 
 "@pixi/sound@^4.2.0":
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/@pixi/sound/-/sound-4.3.1.tgz#8c8116234a1b7d48b418f1b5e06f1ee94dc66fa8"
-  integrity sha512-KpzJIErU2UbgrrI/6cIbZ0BsWPUDma86TyB9vz7cyJ9W4MHVZx1EYCJ0CeWh2XGtvzbUVOozLPnR18ObPZKokA==
+  version "4.3.3"
+  resolved "https://registry.yarnpkg.com/@pixi/sound/-/sound-4.3.3.tgz#121cf57c60a7fdadc739f4f7ba2f3354f44671c4"
+  integrity sha512-sLATyf9B3KKQrM43ypzYisLviuQLKdL0w73tf3ge4WwJKPAxiChC3gCIXYBaFd+6iB9/oeq6tc8zHh9HGGoRAw==
 
 "@pixi/sprite-animated@6.5.9":
   version "6.5.9"
@@ -714,9 +714,9 @@
     eslint-visitor-keys "^3.3.0"
 
 ace-builds@^1.4.14, ace-builds@^1.5.3:
-  version "1.15.2"
-  resolved "https://registry.yarnpkg.com/ace-builds/-/ace-builds-1.15.2.tgz#e9be5c4cbc835894e1202ddc8f7a1f0df049f321"
-  integrity sha512-ANXWnANcB4XgC9tyCtG8EXjeDdDY6iJuPQs+pDiZF/2chQMU7LTOBgw9xJdeRzRyNX5+KGZKwgB80XyY2n5QvA==
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/ace-builds/-/ace-builds-1.16.0.tgz#b4d38f9566157510fc22ee183d4f96b978f4fcc8"
+  integrity sha512-EriMhoxdfhh0zKm7icSt8EXekODAOVsYh9fpnlru9ALwf0Iw7J7bpuqLjhi3QRxvVKR7P0teQdJwTvjVMcYHuw==
 
 acorn-jsx@^5.3.2:
   version "5.3.2"
@@ -1127,10 +1127,10 @@ enhanced-resolve@^5.10.0:
     graceful-fs "^4.2.4"
     tapable "^2.2.0"
 
-enpyre@^0.0.14:
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/enpyre/-/enpyre-0.0.14.tgz#40d4f2f88a6b7322c510181883752b8b221f4010"
-  integrity sha512-0/NCYeBr54AKa0Og3x0vWv67V+Ctty6iIfKdTiRzAxdkFWmSWxccEAjn41HgQTHeEmOl1GnD46aq2W9NVCBCPg==
+enpyre@^0.0.15:
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/enpyre/-/enpyre-0.0.15.tgz#df2f0a83c6986b8ea10faa96aa654ad2f4d23bdf"
+  integrity sha512-Y4fJ4PIzgrdL9Tlk0XXdo8U7DFYDtmBcIvC5bMqFRe5iBlwhOLLKiZmgRM00C3WicJoH6W3DmiZP4NlHasq9tQ==
   dependencies:
     "@pixi/sound" "^4.2.0"
     pixi.js "^6.3.2"

@@ -14,6 +14,9 @@ export const Header = () => {
             <li className="primary">
               <Link href="/en/projects">Ver projetos</Link>
             </li>
+            <li className="primary">
+              <Link href="/en/score">Score</Link>
+            </li>
           </ol>
         </S.Actions>
         <UserSettings />

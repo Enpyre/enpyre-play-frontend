@@ -11,6 +11,7 @@ export type Props = {
 
 export type Score = {
   total: number;
+  average: number;
   user: User;
 };
 
@@ -44,9 +45,11 @@ export type AllScoresResponse = {
 };
 
 export type ScoreContextData = {
-  scores: ScoreResponse | null;
-  allScores: AllScoresResponse | null;
-  fetchAllScores: () => Promise<void>;
+  loading: boolean;
+  weeklyScore: ScoreResponse | null;
+  monthlyScore: ScoreResponse | null;
+  yearlyScore: ScoreResponse | null;
+  globalScore: ScoreResponse | null;
   fetchWeeklyScores: () => Promise<void>;
   fetchMonthlyScores: () => Promise<void>;
   fetchYearlyScores: () => Promise<void>;

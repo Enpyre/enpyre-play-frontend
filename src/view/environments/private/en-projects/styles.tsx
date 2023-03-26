@@ -90,3 +90,11 @@ export const Scrollable = styled.div`
   height: 100%;
   padding: 1.5rem;
 `;
+
+export const EditorWrapper = styled.div`
+  & * {
+    font-family: unset;
+  }
+  width: 100%;
+  height: 100%;
+`;

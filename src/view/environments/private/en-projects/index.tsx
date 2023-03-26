@@ -60,12 +60,17 @@ const CodeEditor = () => {
     width: '100%',
     fontSize: 20,
     height: '100%',
+    setOptions: {
+      fontFamily: 'monospace',
+    },
   };
 
   return (
     <S.Card dark gridRowStart={1} gridRowEnd={3}>
       <S.Space>
-        <EnpyreEditor editorProps={editorProps} />
+        <S.EditorWrapper>
+          <EnpyreEditor editorProps={editorProps} />
+        </S.EditorWrapper>
         <S.Button onClick={runCode} disabled={!pyodideLoaded}>
           Executar
         </S.Button>

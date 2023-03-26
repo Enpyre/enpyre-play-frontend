@@ -6,55 +6,45 @@ import {
   useOutput,
   usePyodide,
 } from 'enpyre';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 
-import { code } from '@/view/components/ui/code/code';
+import { ProjectContext } from '@/contexts/projects';
 import Text from '@/view/components/ui/Text';
 
 import { Header } from '../layout/header';
 import * as S from './styles';
 
-const Instructions = () => (
+type ProjectProps = {
+  projectId: number;
+};
+
+type InstructionsProps = {
+  title: string | undefined;
+  content: string | undefined;
+};
+
+type CodeEditorProps = {
+  code: string | undefined;
+};
+
+const Instructions = ({ title, content }: InstructionsProps) => (
   <S.Card dark gridRowStart={2} gridRowEnd={4}>
     <S.Space>
-      <S.CardTitle>Instruções</S.CardTitle>
-      <Text>Lorem ipsum dolor sit amet</Text>
-      <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Text>
-      <Text>Nullam ac metus neque</Text>
+      <S.CardTitle>{title}</S.CardTitle>
       <Text>
-        Proin finibus tristique luctus. Vivamus malesuada congue lacinia.
-        Quisque nisl mauris, faucibus et tortor id, facilisis tempus lectus.
-      </Text>
-
-      <ul>
-        <li>
-          <Text>Donec nec nibh nec metus gravida vulputate.</Text>
-        </li>
-        <li>
-          <Text>Morbi ultrices ligula lectus.</Text>
-        </li>
-        <li>
-          <Text>A accumsan neque placerat et.</Text>
-        </li>
-        <li>
-          <Text>In placerat mi varius arcu ornare tincidunt.</Text>
-        </li>
-      </ul>
-      <Text>
-        Ut sed erat ligula. Maecenas tempus elementum turpis non tristique.
-        Donec sodales orci et orci vestibulum, a volutpat dolor rutrum.
+        <S.PreWrapper>{content}</S.PreWrapper>
       </Text>
     </S.Space>
   </S.Card>
 );
 
-const CodeEditor = () => {
+const CodeEditor = ({ code }: CodeEditorProps) => {
   const { runCode, pyodideLoaded } = usePyodide();
   const { setCode } = useCode();
 
   useEffect(() => {
     setCode(code);
-  }, [setCode]);
+  }, [setCode, code]);
 
   const editorProps = {
     width: '100%',
@@ -92,7 +82,7 @@ const Output = () => {
 
   return (
     <S.Card dark gridRowStart={3} gridColumnStart={2}>
-      <S.CardTitle>Saída</S.CardTitle>
+      <S.CardTitle>Output</S.CardTitle>
       <S.Scrollable>
         {output.map((msg, index) => (
           <pre key={index}>{msg}</pre>
@@ -102,16 +92,25 @@ const Output = () => {
   );
 };
 
-export function EnProjects() {
+export function EnProjects({ projectId }: ProjectProps) {
+  const { project, fetchProject } = useContext(ProjectContext);
+
+  useEffect(() => {
+    fetchProject(projectId);
+  }, [fetchProject, projectId]);
+
   return (
     <>
       <Header />
       <S.Body>
         <EnpyreProvider>
           <S.GridLayout>
-            <Instructions />
+            <Instructions
+              title={project?.title}
+              content={project?.description}
+            />
             <Display />
-            <CodeEditor />
+            <CodeEditor code={project?.code} />
             <Output />
           </S.GridLayout>
         </EnpyreProvider>

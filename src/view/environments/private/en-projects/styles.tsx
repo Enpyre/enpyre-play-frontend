@@ -98,3 +98,11 @@ export const EditorWrapper = styled.div`
   width: 100%;
   height: 100%;
 `;
+
+export const PreWrapper = styled.pre`
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+`;

@@ -1,18 +1,9 @@
 import { GetServerSideProps } from 'next';
-import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useEffect } from 'react';
 
 import { useAuth } from '@/hooks/auth';
 import { useCookies } from '@/hooks/use-cookies';
-
-const EnProjects = dynamic(
-  () =>
-    import('@/view/environments/private/en-projects').then(
-      (module) => module.EnProjects,
-    ),
-  { ssr: false },
-);
 
 export default function InitialEn() {
   const { user } = useAuth();
@@ -24,7 +15,6 @@ export default function InitialEn() {
       <Head>
         <title>Hora de codar | Enpyre</title>
       </Head>
-      <EnProjects />
     </>
   );
 }

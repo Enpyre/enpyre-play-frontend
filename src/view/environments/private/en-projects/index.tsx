@@ -6,9 +6,10 @@ import {
   useOutput,
   usePyodide,
 } from 'enpyre';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 
 import { ProjectContext } from '@/contexts/projects';
+import { Project } from '@/contexts/projects/types';
 import Text from '@/view/components/ui/Text';
 
 import { Header } from '../layout/header';
@@ -24,7 +25,7 @@ type InstructionsProps = {
 };
 
 type CodeEditorProps = {
-  code: string | undefined;
+  project: Project | null;
 };
 
 const Instructions = ({ title, content }: InstructionsProps) => (
@@ -38,13 +39,21 @@ const Instructions = ({ title, content }: InstructionsProps) => (
   </S.Card>
 );
 
-const CodeEditor = ({ code }: CodeEditorProps) => {
+const CodeEditor = ({ project }: CodeEditorProps) => {
   const { runCode, pyodideLoaded } = usePyodide();
-  const { setCode } = useCode();
+  const { code, setCode } = useCode();
+  const { updateProject } = useContext(ProjectContext);
 
   useEffect(() => {
-    setCode(code);
-  }, [setCode, code]);
+    setCode(project?.code);
+  }, [setCode, project]);
+
+  const onSaveProject = () => {
+    if (!project) return;
+
+    project.code = code;
+    updateProject(project);
+  };
 
   const editorProps = {
     width: '100%',
@@ -61,9 +70,14 @@ const CodeEditor = ({ code }: CodeEditorProps) => {
         <S.EditorWrapper>
           <EnpyreEditor editorProps={editorProps} />
         </S.EditorWrapper>
-        <S.Button onClick={runCode} disabled={!pyodideLoaded}>
-          Executar
-        </S.Button>
+        <S.HorizontalSpace>
+          <S.Button onClick={runCode} disabled={!pyodideLoaded}>
+            Run
+          </S.Button>
+          <S.Button onClick={onSaveProject} disabled={!pyodideLoaded}>
+            Save
+          </S.Button>
+        </S.HorizontalSpace>
       </S.Space>
     </S.Card>
   );
@@ -79,11 +93,19 @@ const Display = () => {
 
 const Output = () => {
   const { output } = useOutput();
+  const scrollableRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    if (!scrollableRef || !scrollableRef.current) return;
+
+    const scrollableElement = scrollableRef.current;
+    scrollableElement.scrollTop = scrollableElement.scrollHeight;
+  }, [output]);
 
   return (
     <S.Card dark gridRowStart={3} gridColumnStart={2}>
       <S.CardTitle>Output</S.CardTitle>
-      <S.Scrollable>
+      <S.Scrollable ref={scrollableRef}>
         {output.map((msg, index) => (
           <pre key={index}>{msg}</pre>
         ))}
@@ -110,7 +132,7 @@ export function EnProjects({ projectId }: ProjectProps) {
               content={project?.description}
             />
             <Display />
-            <CodeEditor code={project?.code} />
+            <CodeEditor project={project} />
             <Output />
           </S.GridLayout>
         </EnpyreProvider>

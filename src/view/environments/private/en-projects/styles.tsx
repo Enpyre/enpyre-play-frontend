@@ -69,6 +69,14 @@ export const Space = styled.div`
   }
 `;
 
+export const HorizontalSpace = styled.div`
+  display: flex;
+  flex-direction: row;
+  & > *:not(:first-child) {
+    margin-left: 1.5rem;
+  }
+`;
+
 export const Button = styled.button`
   background: #464d56;
   color: ${theme.colors.action};

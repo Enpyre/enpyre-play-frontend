@@ -1,22 +1,14 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import { useEffect } from 'react';
 
-import { useAuth } from '@/hooks/auth';
 import { useCookies } from '@/hooks/use-cookies';
-import { EnPage } from '@/view/environments/private/en-page';
 
 export default function InitialEn() {
-  const { user } = useAuth();
-  useEffect(() => {
-    console.log('valor interno -> ', user);
-  }, [user]);
   return (
     <>
       <Head>
         <title>Hora de codar | Enpyre</title>
       </Head>
-      <EnPage />
     </>
   );
 }
@@ -34,6 +26,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   }
 
   return {
-    props: {},
+    redirect: {
+      destination: '/en/projects',
+      permanent: false,
+    },
   };
 };

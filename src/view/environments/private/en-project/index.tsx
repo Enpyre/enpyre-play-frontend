@@ -14,7 +14,7 @@ type ProjectProps = {
   projectId?: number;
 };
 
-export function EnProjects({ projectId }: ProjectProps) {
+export function EnProject({ projectId }: ProjectProps) {
   const { project, fetchProject } = useContext(ProjectContext);
 
   useEffect(() => {

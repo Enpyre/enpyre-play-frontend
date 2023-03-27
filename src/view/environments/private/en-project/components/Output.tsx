@@ -1,7 +1,7 @@
 import { useOutput } from 'enpyre';
 import { useEffect, useRef } from 'react';
 
-import * as S from '@/view/environments/private/en-projects/styles';
+import * as S from '@/view/environments/private/en-project/styles';
 
 const Output = () => {
   const { output } = useOutput();

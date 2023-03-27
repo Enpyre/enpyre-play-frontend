@@ -8,8 +8,8 @@ import { useCookies } from '@/hooks/use-cookies';
 
 const EnProjects = dynamic(
   () =>
-    import('@/view/environments/private/en-projects').then(
-      (module) => module.EnProjects,
+    import('@/view/environments/private/en-project').then(
+      (module) => module.EnProject,
     ),
   { ssr: false },
 );

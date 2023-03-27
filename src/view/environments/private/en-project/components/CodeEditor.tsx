@@ -1,9 +1,12 @@
+import 'react-toastify/dist/ReactToastify.css';
+
 import { EnpyreEditor, useCode, usePyodide } from 'enpyre';
 import { useContext, useEffect } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 
 import { ProjectContext } from '@/contexts/projects';
 import { Project } from '@/contexts/projects/types';
-import * as S from '@/view/environments/private/en-projects/styles';
+import * as S from '@/view/environments/private/en-project/styles';
 
 type CodeEditorProps = {
   project: Project | null;
@@ -18,11 +21,14 @@ const CodeEditor = ({ project }: CodeEditorProps) => {
     setCode(project?.code);
   }, [setCode, project]);
 
+  const notify = () => toast.success('Project updated successfully');
+
   const onSaveProject = () => {
     if (!project) return;
 
     project.code = code;
     updateProject(project);
+    notify();
   };
 
   const editorProps = {
@@ -49,6 +55,7 @@ const CodeEditor = ({ project }: CodeEditorProps) => {
           </S.Button>
         </S.HorizontalSpace>
       </S.Space>
+      <ToastContainer hideProgressBar theme="colored" />
     </S.Card>
   );
 };

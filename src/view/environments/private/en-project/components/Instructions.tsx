@@ -1,5 +1,5 @@
 import Text from '@/view/components/ui/Text';
-import * as S from '@/view/environments/private/en-projects/styles';
+import * as S from '@/view/environments/private/en-project/styles';
 
 type InstructionsProps = {
   title: string | undefined;

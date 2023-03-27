@@ -1,6 +1,6 @@
 import { EnpyreDisplay } from 'enpyre';
 
-import * as S from '@/view/environments/private/en-projects/styles';
+import * as S from '@/view/environments/private/en-project/styles';
 
 const Display = () => {
   return (

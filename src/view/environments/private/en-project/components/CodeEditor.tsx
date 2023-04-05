@@ -5,29 +5,36 @@ import { useContext, useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 
 import { ProjectContext } from '@/contexts/projects';
-import { Project } from '@/contexts/projects/types';
+import { Project, ProjectSolution } from '@/contexts/projects/types';
 import * as S from '@/view/environments/private/en-project/styles';
 
 type CodeEditorProps = {
   project: Project | null;
+  projectSolution: ProjectSolution | null;
 };
 
-const CodeEditor = ({ project }: CodeEditorProps) => {
+const CodeEditor = ({ project, projectSolution }: CodeEditorProps) => {
   const { runCode, pyodideLoaded } = usePyodide();
   const { code, setCode } = useCode();
-  const { updateProject } = useContext(ProjectContext);
+  const { partialUpdateProjectSolution, createProjectSolution } =
+    useContext(ProjectContext);
 
   useEffect(() => {
-    setCode(project?.code);
-  }, [setCode, project]);
+    setCode(projectSolution ? projectSolution.code : project?.code);
+  }, [setCode, projectSolution, project]);
 
   const notify = () => toast.success('Project updated successfully');
 
-  const onSaveProject = () => {
+  const onSaveProject = async () => {
     if (!project) return;
 
-    project.code = code;
-    updateProject(project);
+    if (projectSolution) {
+      projectSolution.code = code;
+      await partialUpdateProjectSolution(projectSolution, project.id);
+    } else {
+      const projectSolution: ProjectSolution = { code, project: project.id };
+      await createProjectSolution(projectSolution, project.id);
+    }
     notify();
   };
 

@@ -1,5 +1,6 @@
-import { ReactNode } from 'react';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 
+import { UserResponse } from '@/contexts/auth/types';
 import { ToFuncRequest } from '@/hooks/to-request';
 import { HttpResponse } from '@/infra/http';
 
@@ -10,16 +11,16 @@ export type Props = {
 };
 
 export type Project = {
-  id: number;
-  title: string;
+  id?: number;
+  title?: string;
   description?: string;
   code?: string;
   link?: string;
-  shared: boolean;
-  public: boolean;
-  created_at: string;
-  updated_at: string;
-  user: User;
+  shared?: boolean;
+  public?: boolean;
+  created_at?: string;
+  updated_at?: string;
+  user?: User | UserResponse;
 };
 
 export type ProjectSolution = {
@@ -42,7 +43,7 @@ export type ProjectContextData = {
   fetchProjects: () => Promise<void>;
   fetchProjectSolution: (id: number) => Promise<void>;
   fetchProject: (id: number, shared_link?: string) => Promise<void>;
-  createProject: (project: Project) => Promise<void>;
+  createProject: (project: Project, user: User) => Promise<Project | undefined>;
   createProjectSolution: (
     project: ProjectSolution,
     projectId: number,
@@ -54,6 +55,7 @@ export type ProjectContextData = {
     projectId: number,
   ) => Promise<void>;
   deleteProject: (id: number, { signOut }: ToFuncRequest) => Promise<void>;
+  setProject: Dispatch<SetStateAction<Project | null>>;
 };
 
 export interface IProjectServices {
@@ -71,6 +73,7 @@ export interface IProjectServices {
   ) => Promise<HttpResponse<ProjectSolution>>;
   createProject: (
     project: Project,
+    user: User,
     { signOut }: ToFuncRequest,
   ) => Promise<HttpResponse<Project>>;
   createProjectSolution: (

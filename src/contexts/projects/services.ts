@@ -1,4 +1,5 @@
 import { KEYS } from '@/constants/keys';
+import { User } from '@/contexts/types';
 import { ToFuncRequest } from '@/hooks/to-request';
 import { HttpClient } from '@/infra/http';
 
@@ -70,11 +71,15 @@ export const projectService: IProjectServices = {
     });
     return result;
   },
-  createProject: async (project: Project, { signOut }: ToFuncRequest) => {
+  createProject: async (
+    project: Project,
+    user: User,
+    { signOut }: ToFuncRequest,
+  ) => {
     const { result } = await HttpClient<Project>('POST', {
       host: KEYS.HOST.API_URL,
       path: '/projects/',
-      data: project,
+      data: { ...project, user },
       validations: {
         codeSuccess: 201,
         msgError: 'Aconteceu algum problema para buscar os dados do usuário',

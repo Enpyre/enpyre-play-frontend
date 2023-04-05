@@ -90,6 +90,9 @@ export const Button = styled.button`
 
 export const CardTitle = styled.h2`
   color: ${theme.colors.dim};
+  font-size: 26px;
+  color: #fff;
+  font-family: monospace;
 `;
 
 export const Scrollable = styled.div`
@@ -113,4 +116,25 @@ export const PreWrapper = styled.pre`
   white-space: -moz-pre-wrap;
   white-space: -o-pre-wrap;
   word-wrap: break-word;
+`;
+
+export const StyledTextArea = styled.textarea`
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  border: none;
+  resize: none;
+`;
+
+export const StyledPre = styled.pre`
+  width: 100%;
+  height: 80%;
+`;
+
+export const StyledInput = styled.input`
+  background: transparent;
+  width: 100%;
+  font-size: inherit;
+  border: none;
+  margin-bottom: 1.5rem;
 `;

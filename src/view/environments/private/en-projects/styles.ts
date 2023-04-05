@@ -92,10 +92,10 @@ export const ItemCard = styled.a`
   width: 425px;
   height: 180px;
   cursor: pointer;
+  flex-shrink: 0;
 
-  &:not(:first-child) {
-    margin-left: 1rem;
-  }
+  margin-right: 1rem;
+  margin-top: 1rem;
 
   &:hover {
     background: #626674;
@@ -106,6 +106,7 @@ export const CardList = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 1.5rem;
+  flex-wrap: wrap;
 `;
 
 export const ItemTitle = styled.h2`

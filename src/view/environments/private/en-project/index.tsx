@@ -15,8 +15,7 @@ type ProjectProps = {
 };
 
 export function EnProject({ projectId }: ProjectProps) {
-  const { project, projectSolution, fetchProject, fetchProjectSolution } =
-    useContext(ProjectContext);
+  const { fetchProject, fetchProjectSolution } = useContext(ProjectContext);
 
   useEffect(() => {
     if (!projectId) return;
@@ -31,12 +30,9 @@ export function EnProject({ projectId }: ProjectProps) {
       <S.Body>
         <EnpyreProvider>
           <S.GridLayout>
-            <Instructions
-              title={project?.title}
-              content={project?.description}
-            />
+            <Instructions />
             <Display />
-            <CodeEditor project={project} projectSolution={projectSolution} />
+            <CodeEditor />
             <Output />
           </S.GridLayout>
         </EnpyreProvider>

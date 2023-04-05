@@ -1,5 +1,6 @@
 import { createContext, useCallback, useState } from 'react';
 
+import { User } from '@/contexts/types';
 import { useAuth } from '@/hooks/auth';
 
 import { projectService } from './services';
@@ -40,7 +41,7 @@ export const ProjectProvider = ({ children }: Props) => {
 
       if (error) return;
 
-      setProject(data);
+      setProject(data || {});
     },
     [signOut],
   );
@@ -59,14 +60,19 @@ export const ProjectProvider = ({ children }: Props) => {
   );
 
   const createProject = useCallback(
-    async (project: Project) => {
-      const { data, error } = await projectService.createProject(project, {
-        signOut,
-      });
+    async (project: Project, user: User) => {
+      const { data, error } = await projectService.createProject(
+        project,
+        user,
+        {
+          signOut,
+        },
+      );
 
       if (error) return;
 
       setProject(data);
+      return data;
     },
     [signOut],
   );
@@ -158,6 +164,7 @@ export const ProjectProvider = ({ children }: Props) => {
         partialUpdateProject,
         partialUpdateProjectSolution,
         deleteProject,
+        setProject,
       }}>
       {children}
     </ProjectContext.Provider>

@@ -1,23 +1,26 @@
 import 'react-toastify/dist/ReactToastify.css';
 
 import { EnpyreEditor, useCode, usePyodide } from 'enpyre';
+import Router from 'next/router';
 import { useContext, useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 
+import { AuthContext } from '@/contexts/auth';
 import { ProjectContext } from '@/contexts/projects';
-import { Project, ProjectSolution } from '@/contexts/projects/types';
+import { ProjectSolution } from '@/contexts/projects/types';
 import * as S from '@/view/environments/private/en-project/styles';
 
-type CodeEditorProps = {
-  project: Project | null;
-  projectSolution: ProjectSolution | null;
-};
-
-const CodeEditor = ({ project, projectSolution }: CodeEditorProps) => {
+const CodeEditor = () => {
   const { runCode, pyodideLoaded } = usePyodide();
   const { code, setCode } = useCode();
-  const { partialUpdateProjectSolution, createProjectSolution } =
-    useContext(ProjectContext);
+  const {
+    project,
+    projectSolution,
+    partialUpdateProjectSolution,
+    createProjectSolution,
+    createProject,
+  } = useContext(ProjectContext);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     setCode(projectSolution ? projectSolution.code : project?.code);
@@ -26,7 +29,7 @@ const CodeEditor = ({ project, projectSolution }: CodeEditorProps) => {
   const notify = () => toast.success('Project updated successfully');
 
   const onSaveProject = async () => {
-    if (!project) return;
+    if (!project || !project.id) return;
 
     if (projectSolution) {
       projectSolution.code = code;
@@ -36,6 +39,28 @@ const CodeEditor = ({ project, projectSolution }: CodeEditorProps) => {
       await createProjectSolution(projectSolution, project.id);
     }
     notify();
+  };
+
+  const onCreateProject = async () => {
+    if (!user) return;
+
+    if (!project?.title) {
+      toast.error('Título do projeto é obrigatório.');
+      return;
+    }
+
+    const result = await createProject(project, user);
+    if (result?.id) {
+      await Router.push(`/en/projects/${result.id}`);
+    }
+  };
+
+  const handleSave = async () => {
+    if (!project || !project.id) {
+      return onCreateProject();
+    }
+
+    return onSaveProject();
   };
 
   const editorProps = {
@@ -57,7 +82,7 @@ const CodeEditor = ({ project, projectSolution }: CodeEditorProps) => {
           <S.Button onClick={runCode} disabled={!pyodideLoaded}>
             Run
           </S.Button>
-          <S.Button onClick={onSaveProject} disabled={!pyodideLoaded}>
+          <S.Button onClick={handleSave} disabled={!pyodideLoaded}>
             Save
           </S.Button>
         </S.HorizontalSpace>

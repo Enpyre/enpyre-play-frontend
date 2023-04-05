@@ -2,6 +2,8 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import tw from 'tailwind-styled-components';
 
+import { theme } from '@/helpers/theme';
+
 export const Container = tw.div`
   flex
   flex-col
@@ -34,7 +36,7 @@ export const Content = tw.div`
   overflow-y-auto
 `;
 
-export const ContainerFooter = tw.div`
+export const ButtonWrapper = tw.div`
   flex
   items-center
   justify-between
@@ -51,42 +53,6 @@ export const ItemButton = tw.button`
   h-10
   rounded
   focus:outline-none
-`;
-
-export const Icon = tw.i`
-`;
-
-export const List = tw.ul`
-  flex
-  flex-col
-  w-full
-  h-full
-  overflow-y-auto
-`;
-
-const ItemColor = styled(Link)`
-  background: ${(props) => props.theme.colors.dracula};
-`;
-
-export const Item = tw(ItemColor)`
-  flex
-  items-center
-  justify-between
-  w-full
-  h-16
-  px-4
-  border-b
-  border-gray-400
-  cursor-pointer
-`;
-
-export const ItemTitle = tw.h2`
-  text-sm
-  font-semibold
-`;
-
-export const ItemDescription = tw.p`
-  text-xs
 `;
 
 export const ItemIcon = tw.i`
@@ -117,4 +83,40 @@ export const Button = tw(StyledButton)`
   h-10
   rounded
   focus:outline-none
+`;
+
+export const ItemCard = styled.a`
+  background: ${theme.colors.dracula};
+  padding: 20px;
+  border-radius: 15px;
+  width: 425px;
+  height: 180px;
+  cursor: pointer;
+
+  &:not(:first-child) {
+    margin-left: 1rem;
+  }
+
+  &:hover {
+    background: #626674;
+  }
+`;
+
+export const CardList = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 1.5rem;
+`;
+
+export const ItemTitle = styled.h2`
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 1rem;
+`;
+
+export const ItemDescription = styled.p`
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `;

@@ -1,21 +1,18 @@
 import React, { useEffect } from 'react';
-import { FiChevronRight, FiFolder } from 'react-icons/fi';
 
 import { useProjects } from '@/hooks/projects';
 
 import { Header } from '../layout/header';
 import {
   Button,
+  ButtonWrapper,
+  CardList,
   Container,
-  ContainerFooter,
   ContainerHeader,
   Content,
-  Item,
-  ItemButton,
+  ItemCard,
   ItemDescription,
-  ItemIcon,
   ItemTitle,
-  List,
   Title,
 } from './styles';
 
@@ -34,25 +31,19 @@ export const Projects: React.FC = () => {
           <Title>Projetos</Title>
         </ContainerHeader>
         <Content>
-          <List>
+          <ButtonWrapper>
+            <Button href="/en/projects/create/">Novo Projeto</Button>
+          </ButtonWrapper>
+          <CardList>
             {projects?.results.map((project) => (
-              <Item key={project.id} href={`/en/projects/${project.id}`}>
-                <ItemIcon>
-                  <FiFolder />
-                </ItemIcon>
+              <ItemCard key={project.id} href={`/en/projects/${project.id}`}>
                 <ItemTitle>{project.title}</ItemTitle>
                 <ItemDescription>
                   {project.description || 'Sem descrição'}
                 </ItemDescription>
-                <ItemButton>
-                  <FiChevronRight />
-                </ItemButton>
-              </Item>
+              </ItemCard>
             ))}
-          </List>
-          <ContainerFooter>
-            <Button href="/en/projects/create/">Novo Projeto</Button>
-          </ContainerFooter>
+          </CardList>
         </Content>
       </Container>
     </>

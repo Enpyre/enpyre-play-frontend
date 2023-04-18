@@ -37,12 +37,12 @@ export type ProjectResponse = {
 };
 
 export type ProjectContextData = {
-  listProjects: () => Promise<void>;
-  getProject: (id: number, shared_link?: string) => Promise<void>;
   projects: ProjectResponse | null;
   project: Project | null;
   projectSolution: ProjectSolution | null;
+  fetchProjects: () => Promise<void>;
   fetchProjectSolution: (id: number) => Promise<void>;
+  fetchProject: (id: number, shared_link?: string) => Promise<void>;
   createProject: (project: Project, user: User) => Promise<Project | undefined>;
   createProjectSolution: (
     project: ProjectSolution,

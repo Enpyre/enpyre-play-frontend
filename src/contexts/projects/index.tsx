@@ -23,7 +23,7 @@ export const ProjectProvider = ({ children }: Props) => {
     useState<ProjectSolution | null>(null);
   const { signOut } = useAuth();
 
-  const listProjects = useCallback(async () => {
+  const fetchProjects = useCallback(async () => {
     const { data, error } = await projectService.listProjects({ signOut });
 
     if (error) return;
@@ -31,7 +31,7 @@ export const ProjectProvider = ({ children }: Props) => {
     setProjects(data);
   }, [signOut]);
 
-  const getProject = useCallback(
+  const fetchProject = useCallback(
     async (id: number, shared_link?: string) => {
       const { data, error } = await projectService.getProject(
         id,
@@ -54,7 +54,6 @@ export const ProjectProvider = ({ children }: Props) => {
 
       if (error) return;
 
-      setProject(data);
       setProjectSolution(data);
     },
     [signOut],
@@ -153,12 +152,12 @@ export const ProjectProvider = ({ children }: Props) => {
   return (
     <ProjectContext.Provider
       value={{
-        listProjects,
-        getProject,
         projects,
         project,
         projectSolution,
         fetchProjectSolution,
+        fetchProjects,
+        fetchProject,
         createProject,
         createProjectSolution,
         updateProject,

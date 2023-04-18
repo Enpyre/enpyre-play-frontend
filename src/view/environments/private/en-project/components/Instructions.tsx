@@ -1,7 +1,7 @@
 import { ChangeEvent, useContext } from 'react';
 
 import { ProjectContext } from '@/contexts/projects';
-import Text from '@/view/components/ui/Text';
+import Text from '@/view/components/ui/text';
 import * as S from '@/view/environments/private/en-project/styles';
 
 const Instructions = () => {

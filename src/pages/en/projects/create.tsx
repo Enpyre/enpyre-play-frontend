@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
 import { ProjectProvider } from '@/contexts/projects';
-import { useCookies } from '@/hooks/use-cookies';
+import { useCookies } from '@/hooks/cookies';
 
 const EnProjects = dynamic(
   () =>

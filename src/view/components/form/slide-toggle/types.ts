@@ -1,6 +1,6 @@
 import { InputHTMLAttributes } from 'react';
 
-import { ListItem } from '../../../../types';
+import { ListItem } from '../select/types';
 
 export type Props = {
   name: string;

@@ -11,10 +11,9 @@ export const projectService: IProjectServices = {
       path: '/projects/',
       validations: {
         codeSuccess: 200,
-        msgError: 'Aconteceu algum problema para buscar os dados do usuário',
+        msgError: 'Aconteceu algum problema para buscar a lista de projetos',
         others: (status) => {
           if (status === 401 && signOut) {
-            console.log('entrou no signout do listProjects');
             signOut();
             return;
           }
@@ -35,10 +34,9 @@ export const projectService: IProjectServices = {
         : `/projects/${id}/`,
       validations: {
         codeSuccess: 200,
-        msgError: 'Aconteceu algum problema para buscar os dados do usuário',
+        msgError: 'Aconteceu algum problema para buscar o projeto',
         others: (status) => {
           if (status === 401 && signOut) {
-            console.log('entrou no signout do getProject');
             signOut();
             return;
           }
@@ -54,10 +52,9 @@ export const projectService: IProjectServices = {
       data: project,
       validations: {
         codeSuccess: 201,
-        msgError: 'Aconteceu algum problema para buscar os dados do usuário',
+        msgError: 'Aconteceu algum problema ao tentar criar um projeto',
         others: (status) => {
           if (status === 401 && signOut) {
-            console.log('entrou no signout do createProject');
             signOut();
             return;
           }
@@ -73,7 +70,7 @@ export const projectService: IProjectServices = {
       data: project,
       validations: {
         codeSuccess: 200,
-        msgError: 'Aconteceu algum problema para buscar os dados do usuário',
+        msgError: 'Aconteceu algum problema ao tentar atualizar um projeto',
         others: (status) => {
           if (status === 401 && signOut) {
             console.log('entrou no signout do updateProject');
@@ -113,7 +110,7 @@ export const projectService: IProjectServices = {
       path: `/projects/${id}/`,
       validations: {
         codeSuccess: 204,
-        msgError: 'Aconteceu algum problema para buscar os dados do usuário',
+        msgError: 'Aconteceu algum problema ao tentar deletar o projeto',
         others: (status) => {
           if (status === 401 && signOut) {
             console.log('entrou no signout do deleteProject');

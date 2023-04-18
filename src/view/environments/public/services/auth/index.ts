@@ -1,7 +1,7 @@
 import { KEYS } from '@/constants/keys';
 import { HttpClient, HttpResponse } from '@/infra/http';
 
-import { ResponseSignIn, SignInParams, SignInResult } from './types';
+import { ResponseSignIn, SignInParams } from './types';
 
 export const AuthService = {
   signIn: async (data: SignInParams): Promise<HttpResponse<ResponseSignIn>> => {

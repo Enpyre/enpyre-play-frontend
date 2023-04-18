@@ -3,7 +3,13 @@ import { createContext, useCallback, useState } from 'react';
 import { useAuth } from '@/hooks/auth';
 
 import { quizService } from './services';
-import { Props, Quiz, QuizContextData, QuizResponse } from './types';
+import {
+  Props,
+  QuestionResponse,
+  Quiz,
+  QuizContextData,
+  QuizResponse,
+} from './types';
 
 export const QuizContext = createContext<QuizContextData>(
   {} as QuizContextData,
@@ -11,7 +17,7 @@ export const QuizContext = createContext<QuizContextData>(
 
 export const QuizProvider = ({ children }: Props) => {
   const [quizzes, setQuizzes] = useState<QuizResponse | null>(null);
-  const [quiz, setQuiz] = useState<Quiz | null>(null);
+  const [quiz, setQuiz] = useState<QuestionResponse | null>(null);
   const { signOut } = useAuth();
 
   const fetchQuizzes = useCallback(async () => {
@@ -35,13 +41,13 @@ export const QuizProvider = ({ children }: Props) => {
 
   const createQuiz = useCallback(
     async (quiz: Quiz) => {
-      const { data, error } = await quizService.createQuiz(quiz, {
+      const { data, error, msgError } = await quizService.createQuiz(quiz, {
         signOut,
       });
 
-      if (error) return;
+      if (error) return { data, error, msgError };
 
-      setQuiz(data);
+      return { data, error, msgError };
     },
     [signOut],
   );

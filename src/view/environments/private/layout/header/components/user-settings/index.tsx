@@ -4,10 +4,11 @@ import { useCallback, useState } from 'react';
 import { useAuth } from '@/hooks/auth';
 import { Item, ItemsProps } from '@/view/components/ui/item';
 
+import ProfilePic from '../../../../../../../../public/profile-pattern.jpeg';
 import * as S from './styles';
 
 /**
- * Componente de configurações do usuário
+ * Component User Settings
  */
 export const UserSettings = () => {
   const { user, signOut } = useAuth();
@@ -50,7 +51,7 @@ export const UserSettings = () => {
           alt="Avatar do usuário"
           sizes="80vw"
           style={{ objectFit: 'cover' }}
-          src={user?.picture as string}
+          src={(user?.picture as string) ?? ProfilePic}
         />
       </S.CircleInitials>
       <Item

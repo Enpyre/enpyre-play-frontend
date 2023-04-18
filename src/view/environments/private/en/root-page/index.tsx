@@ -4,10 +4,10 @@ import '/node_modules/react-resizable/css/styles.css';
 import { useEffect, useState } from 'react';
 import GridLayout from 'react-grid-layout';
 
-import { Header } from '../layout/header';
+import { Header } from '../../layout/header';
 import * as S from './styles';
 
-export const EnPage = () => {
+export const RootEnPage = () => {
   const [windowDimensions, setWindowDimensions] = useState({
     width: 300,
     fullWidth: 768,
@@ -35,7 +35,7 @@ export const EnPage = () => {
           return { ...old, fullWidth: getFullWidth };
         })
       : null;
-  }, []);
+  }, [getFullWidth, getHeight, getWidth]);
   const layout = [
     { i: 'game', x: 0, y: 0, w: 1, h: windowDimensions.height },
     { i: 'help', x: 0, y: 1, w: 1, h: windowDimensions.height },

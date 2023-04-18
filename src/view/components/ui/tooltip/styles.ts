@@ -29,6 +29,10 @@ export const Wrapper = styled.div<WrapperProps>`
     display: flex;
     position: absolute;
 
+    p {
+      white-space: nowrap;
+    }
+
     ${animation('viewOpacity', 0.3)}
 
     &.hide {
@@ -46,16 +50,17 @@ export const Wrapper = styled.div<WrapperProps>`
       }[side];
     }}
 
-    ${({ align, sizeWidth, alignOffset }) => {
+    ${({ align, alignOffset }) => {
       return {
         center: css`
-          left: calc(50% - ${sizeWidth / 2 + alignOffset}px);
+          left: calc(50%);
+          transform: translateX(-50%);
         `,
         left: css`
-          left: ${alignOffset - 4}px;
+          left: ${alignOffset}px;
         `,
         right: css`
-          right: ${alignOffset - 4}px;
+          right: ${alignOffset}px;
         `,
       }[align];
     }}

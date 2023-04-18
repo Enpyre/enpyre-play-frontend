@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 export const Wrapper = styled.button<{
   height: number;
   outline?: boolean;
+  circle?: boolean;
   color: string;
   disabled: boolean;
 }>`
@@ -16,6 +17,14 @@ export const Wrapper = styled.button<{
   cursor: pointer;
   gap: 6px;
 
+  & > i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg {
+      font-size: 24px;
+    }
+  }
   ${({ theme, outline, color }) =>
     outline
       ? css`
@@ -157,5 +166,18 @@ export const Wrapper = styled.button<{
         color: ${({ theme }) => theme.colors.neutral.n200};
         cursor: not-allowed;
       }
+    `}
+
+    ${({ circle, height }) =>
+    circle &&
+    css`
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      ${height &&
+      css`
+        width: ${height}px;
+        height: ${height}px;
+      `}
     `}
 `;

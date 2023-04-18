@@ -10,19 +10,21 @@ export const ProjectContext = createContext<ProjectContextData>(
 );
 
 export const ProjectProvider = ({ children }: Props) => {
-  const [projects, setProjects] = useState<ProjectResponse | null>(null);
-  const [project, setProject] = useState<Project | null>(null);
+  const [stateProjects, setStateProjects] = useState<ProjectResponse | null>(
+    null,
+  );
+  const [stateProject, setStateProject] = useState<Project | null>(null);
   const { signOut } = useAuth();
 
-  const fetchProjects = useCallback(async () => {
+  const listProjects = useCallback(async () => {
     const { data, error } = await projectService.listProjects({ signOut });
 
     if (error) return;
 
-    setProjects(data);
+    setStateProjects(data);
   }, [signOut]);
 
-  const fetchProject = useCallback(
+  const getProject = useCallback(
     async (id: number, shared_link?: string) => {
       const { data, error } = await projectService.getProject(
         id,
@@ -32,7 +34,7 @@ export const ProjectProvider = ({ children }: Props) => {
 
       if (error) return;
 
-      setProject(data);
+      setStateProject(data);
     },
     [signOut],
   );
@@ -45,7 +47,7 @@ export const ProjectProvider = ({ children }: Props) => {
 
       if (error) return;
 
-      setProject(data);
+      setStateProject(data);
     },
     [signOut],
   );
@@ -58,7 +60,7 @@ export const ProjectProvider = ({ children }: Props) => {
 
       if (error) return;
 
-      setProject(data);
+      setStateProject(data);
     },
     [signOut],
   );
@@ -74,7 +76,7 @@ export const ProjectProvider = ({ children }: Props) => {
 
       if (error) return;
 
-      setProject(data);
+      setStateProject(data);
     },
     [signOut],
   );
@@ -85,7 +87,7 @@ export const ProjectProvider = ({ children }: Props) => {
 
       if (error) return;
 
-      setProject(null);
+      setStateProject(null);
     },
     [signOut],
   );
@@ -93,10 +95,10 @@ export const ProjectProvider = ({ children }: Props) => {
   return (
     <ProjectContext.Provider
       value={{
-        projects,
-        project,
-        fetchProjects,
-        fetchProject,
+        stateProjects,
+        stateProject,
+        listProjects,
+        getProject,
         createProject,
         updateProject,
         partialUpdateProject,

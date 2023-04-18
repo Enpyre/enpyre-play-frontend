@@ -27,10 +27,10 @@ export const CallbackPage = () => {
           throw new Error(err.message);
         }
       }
-  }, [router.isReady]);
+  }, [code, router, signIn]);
 
   useEffect(() => {
     if (router.isReady) responseSignIn();
-  }, [router.isReady]);
+  }, [responseSignIn, router.isReady]);
   return <Loading isBackground />;
 };

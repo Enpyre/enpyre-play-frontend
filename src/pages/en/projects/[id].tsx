@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { ProjectProvider } from '@/contexts/projects';
-import { useCookies } from '@/hooks/use-cookies';
+import { useCookies } from '@/hooks/cookies';
 
 const EnProjects = dynamic(
   () =>

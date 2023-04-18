@@ -11,6 +11,8 @@ const GlobalStyles = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
 
+    color: ${({ theme }) => theme.colors.neutral.n50};
+
     &::before,
     &::after {
       box-sizing: inherit;

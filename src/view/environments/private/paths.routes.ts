@@ -6,4 +6,5 @@ export const PRIVATE_ROUTES = {
     VIEW: '/en/quizzes',
     CREATE: '/en/quizzes/create',
   },
+  SCORE: '/en/score',
 };

@@ -18,7 +18,7 @@ export const HomePage = () => {
                 you can build and run your projects from anywhere in the world.
               </h3>
             </div>
-            <Link href="/en">Partiu codar</Link>
+            <Link href="/en/projects/create/">Partiu codar</Link>
           </S.Left>
           <S.Right>
             <CodeEditor />

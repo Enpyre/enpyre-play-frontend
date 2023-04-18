@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
-import { TooltipAdvanced } from '../../../tooltip-advanced';
+import { Tooltip } from '@/view/components/ui/tooltip';
+
 import * as S from './styles';
 
 type Props = {
@@ -33,7 +34,7 @@ export const TableActionButton = ({
   return (
     <>
       {!onClick && to && (
-        <TooltipAdvanced
+        <Tooltip
           trigger={
             <S.Linked>
               {isExternal && (
@@ -42,24 +43,24 @@ export const TableActionButton = ({
                 </a>
               )}
               {!isExternal && (
-                <Link to={to} target={isBlank ? '_blank' : '_self'}>
+                <Link href={to} target={isBlank ? '_blank' : '_self'}>
                   {icon}
                 </Link>
               )}
             </S.Linked>
           }>
           {title}
-        </TooltipAdvanced>
+        </Tooltip>
       )}
       {onClick && !to && !isExternal && (
-        <TooltipAdvanced
+        <Tooltip
           trigger={
             <S.Wrapper onClick={onClick} disabled={disabled} hasAny={hasAny}>
               {icon}
             </S.Wrapper>
           }>
           <p>{title}</p>
-        </TooltipAdvanced>
+        </Tooltip>
       )}
     </>
   );

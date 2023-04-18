@@ -1,19 +1,26 @@
 import { createContext, useCallback, useState } from 'react';
 
+import { User } from '@/contexts/types';
 import { useAuth } from '@/hooks/auth';
 
 import { projectService } from './services';
-import { Project, ProjectContextData, ProjectResponse, Props } from './types';
+import {
+  Project,
+  ProjectContextData,
+  ProjectResponse,
+  ProjectSolution,
+  Props,
+} from './types';
 
 export const ProjectContext = createContext<ProjectContextData>(
   {} as ProjectContextData,
 );
 
 export const ProjectProvider = ({ children }: Props) => {
-  const [stateProjects, setStateProjects] = useState<ProjectResponse | null>(
-    null,
-  );
-  const [stateProject, setStateProject] = useState<Project | null>(null);
+  const [projects, setProjects] = useState<ProjectResponse | null>(null);
+  const [project, setProject] = useState<Project | null>(null);
+  const [projectSolution, setProjectSolution] =
+    useState<ProjectSolution | null>(null);
   const { signOut } = useAuth();
 
   const listProjects = useCallback(async () => {
@@ -21,7 +28,7 @@ export const ProjectProvider = ({ children }: Props) => {
 
     if (error) return;
 
-    setStateProjects(data);
+    setProjects(data);
   }, [signOut]);
 
   const getProject = useCallback(
@@ -34,20 +41,54 @@ export const ProjectProvider = ({ children }: Props) => {
 
       if (error) return;
 
-      setStateProject(data);
+      setProject(data || {});
     },
     [signOut],
   );
 
-  const createProject = useCallback(
-    async (project: Project) => {
-      const { data, error } = await projectService.createProject(project, {
+  const fetchProjectSolution = useCallback(
+    async (projectId: number) => {
+      const { data, error } = await projectService.getSolution(projectId, {
         signOut,
       });
 
       if (error) return;
 
-      setStateProject(data);
+      setProject(data);
+      setProjectSolution(data);
+    },
+    [signOut],
+  );
+
+  const createProject = useCallback(
+    async (project: Project, user: User) => {
+      const { data, error } = await projectService.createProject(
+        project,
+        user,
+        {
+          signOut,
+        },
+      );
+
+      if (error) return;
+
+      setProject(data);
+      return data;
+    },
+    [signOut],
+  );
+
+  const createProjectSolution = useCallback(
+    async (projectSolution: ProjectSolution, projectId: number) => {
+      const { data, error } = await projectService.createProjectSolution(
+        projectSolution,
+        projectId,
+        { signOut },
+      );
+
+      if (error) return;
+
+      setProjectSolution(data);
     },
     [signOut],
   );
@@ -60,7 +101,7 @@ export const ProjectProvider = ({ children }: Props) => {
 
       if (error) return;
 
-      setStateProject(data);
+      setProject(data);
     },
     [signOut],
   );
@@ -76,7 +117,24 @@ export const ProjectProvider = ({ children }: Props) => {
 
       if (error) return;
 
-      setStateProject(data);
+      setProject(data);
+    },
+    [signOut],
+  );
+
+  const partialUpdateProjectSolution = useCallback(
+    async (projectSolution: Partial<ProjectSolution>, projectId: number) => {
+      const { data, error } = await projectService.partialUpdateProjectSolution(
+        projectSolution,
+        projectId,
+        {
+          signOut,
+        },
+      );
+
+      if (error) return;
+
+      setProjectSolution(data);
     },
     [signOut],
   );
@@ -87,7 +145,7 @@ export const ProjectProvider = ({ children }: Props) => {
 
       if (error) return;
 
-      setStateProject(null);
+      setProject(null);
     },
     [signOut],
   );
@@ -95,14 +153,19 @@ export const ProjectProvider = ({ children }: Props) => {
   return (
     <ProjectContext.Provider
       value={{
-        stateProjects,
-        stateProject,
         listProjects,
         getProject,
+        projects,
+        project,
+        projectSolution,
+        fetchProjectSolution,
         createProject,
+        createProjectSolution,
         updateProject,
         partialUpdateProject,
+        partialUpdateProjectSolution,
         deleteProject,
+        setProject,
       }}>
       {children}
     </ProjectContext.Provider>

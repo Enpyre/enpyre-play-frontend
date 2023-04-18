@@ -16,4 +16,9 @@ export const menuList = [
     title: 'Quiz',
     href: PRIVATE_ROUTES.QUIZZES.VIEW,
   },
+  {
+    id: 'score',
+    title: 'Score',
+    href: PRIVATE_ROUTES.SCORE,
+  },
 ];

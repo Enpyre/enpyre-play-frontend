@@ -8,11 +8,13 @@ interface CardProps {
   gridColumnStart?: number;
   gridColumnEnd?: number;
   dark?: boolean;
+  scroll?: boolean;
 }
 
 export const Body = styled.div`
   width: 100%;
   padding: 1rem;
+  padding-top: 70px;
 `;
 
 export const GridLayout = styled.div`
@@ -31,6 +33,14 @@ export const Card = styled.div<CardProps>`
   background: white;
   padding: 1rem;
   overflow: hidden;
+
+  ${({ scroll }) => {
+    return scroll
+      ? css`
+          overflow: scroll;
+        `
+      : null;
+  }}
 
   ${({ dark }) =>
     dark &&
@@ -59,6 +69,14 @@ export const Space = styled.div`
   }
 `;
 
+export const HorizontalSpace = styled.div`
+  display: flex;
+  flex-direction: row;
+  & > *:not(:first-child) {
+    margin-left: 1.5rem;
+  }
+`;
+
 export const Button = styled.button`
   background: #464d56;
   color: ${theme.colors.action};
@@ -72,4 +90,51 @@ export const Button = styled.button`
 
 export const CardTitle = styled.h2`
   color: ${theme.colors.dim};
+  font-size: 26px;
+  color: #fff;
+  font-family: monospace;
+`;
+
+export const Scrollable = styled.div`
+  overflow: scroll;
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
+`;
+
+export const EditorWrapper = styled.div`
+  & * {
+    font-family: unset;
+  }
+  width: 100%;
+  height: 100%;
+`;
+
+export const PreWrapper = styled.pre`
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+`;
+
+export const StyledTextArea = styled.textarea`
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  border: none;
+  resize: none;
+`;
+
+export const StyledPre = styled.pre`
+  width: 100%;
+  height: 80%;
+`;
+
+export const StyledInput = styled.input`
+  background: transparent;
+  width: 100%;
+  font-size: inherit;
+  border: none;
+  margin-bottom: 1.5rem;
 `;

@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
-import { convertFont } from '../../../../utils/formatter';
+import { convertFont } from '@/utils';
+
 import { Props } from '.';
 
 export const Wrapper = styled.td<{
@@ -79,7 +80,7 @@ export const Wrapper = styled.td<{
     `}
 
     & > a {
-    color: ${({ theme }) => theme.colors.neutrals.white};
+    color: ${({ theme }) => theme.colors.neutral.n50};
 
     &:hover {
       text-decoration: underline;

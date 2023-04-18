@@ -23,9 +23,9 @@ export const ContainerBlur = styled(Wrapper)<{ isBlur: boolean }>`
 
 export const FloatActionButton = styled.button<{ isActive: boolean }>`
   height: 40px;
-  color: ${({ theme }) => theme.colors.neutrals.white};
-  border: 1px solid ${({ theme }) => theme.colors.third};
-  background: ${({ theme }) => theme.colors.third};
+  color: ${({ theme }) => theme.colors.neutral.n50};
+  border: 1px solid ${({ theme }) => theme.colors.neutral.n100};
+  background: ${({ theme }) => theme.colors.primary.p100};
   padding: 0 15px;
   display: ${({ isActive }) => (isActive ? 'flex' : 'none')};
   justify-content: center;

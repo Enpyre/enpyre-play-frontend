@@ -2,7 +2,7 @@ import { KEYS } from '@/constants/keys';
 import { ToFuncRequest } from '@/hooks/to-request';
 import { HttpClient } from '@/infra/http';
 
-import { IQuizServices, Quiz, QuizResponse } from './types';
+import { IQuizServices, QuestionResponse, Quiz, QuizResponse } from './types';
 
 export const quizService: IQuizServices = {
   listQuizzes: async ({ signOut }: ToFuncRequest) => {
@@ -23,10 +23,10 @@ export const quizService: IQuizServices = {
     });
     return result;
   },
-  getQuiz: async (id: number, { signOut }: ToFuncRequest) => {
-    const { result } = await HttpClient<Quiz>('GET', {
+  getQuiz: async <T>(id: number, { signOut }: ToFuncRequest) => {
+    const { result } = await HttpClient<T>('GET', {
       host: KEYS.HOST.API_URL,
-      path: `/quizzes/${id}/`,
+      path: `/quizzes/${id}/questions/`,
       validations: {
         codeSuccess: 200,
         msgError: 'Aconteceu algum problema para buscar os dados do usuário',
@@ -61,7 +61,7 @@ export const quizService: IQuizServices = {
     return result;
   },
   updateQuiz: async (quiz: Quiz, { signOut }: ToFuncRequest) => {
-    const { result } = await HttpClient<Quiz>('PUT', {
+    const { result } = await HttpClient<QuestionResponse>('PUT', {
       host: KEYS.HOST.API_URL,
       path: `/quizzes/${quiz.id}/`,
       data: quiz,
@@ -83,7 +83,7 @@ export const quizService: IQuizServices = {
     quiz: Partial<Quiz>,
     { signOut }: ToFuncRequest,
   ) => {
-    const { result } = await HttpClient<Quiz>('PATCH', {
+    const { result } = await HttpClient<QuestionResponse>('PATCH', {
       host: KEYS.HOST.API_URL,
       path: `/quizzes/${quiz.id}/`,
       data: quiz,

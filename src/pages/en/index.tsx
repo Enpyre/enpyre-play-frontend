@@ -1,7 +1,8 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 
-import { useCookies } from '@/hooks/use-cookies';
+import { useCookies } from '@/hooks/cookies';
+import { RootEnPage } from '@/view/environments/private/en/root-page';
 
 export default function InitialEn() {
   return (
@@ -9,6 +10,7 @@ export default function InitialEn() {
       <Head>
         <title>Hora de codar | Enpyre</title>
       </Head>
+      <RootEnPage />
     </>
   );
 }

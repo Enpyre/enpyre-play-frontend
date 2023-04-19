@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
-import { destroyCookie, parseCookies, setCookie } from 'nookies';
-import { createContext, useCallback, useEffect, useRef, useState } from 'react';
+import { destroyCookie } from 'nookies';
+import { createContext, useCallback, useEffect, useState } from 'react';
 
 import { KEYS } from '@/constants/keys';
-import { useCookies } from '@/hooks/use-cookies';
+import { useCookies } from '@/hooks/cookies';
 import { createJWTCookie } from '@/utils';
 import { AuthService } from '@/view/environments/public/services/auth';
 
@@ -17,7 +17,7 @@ export const AuthContext = createContext<AuthContextData>(
 export const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useState<UserResponse | null>(null);
   const router = useRouter();
-  const { refreshToken, accessToken } = useCookies();
+  const { refreshToken } = useCookies();
 
   const signIn = useCallback(async (user: ContextUser) => {
     try {
@@ -47,12 +47,13 @@ export const AuthProvider = ({ children }: Props) => {
     }
   }, []);
 
-  const signOut = async (): Promise<void> => {
+  const signOut = useCallback(async (): Promise<void> => {
     destroyCookie(undefined, KEYS.STORAGE.USER_ACCESS_TOKEN);
     destroyCookie(undefined, KEYS.STORAGE.USER_REFRESH_TOKEN);
     setUser(null);
     router.push('/');
-  };
+  }, [router]);
+
   const userData = useCallback(async () => {
     const { data, error } = await authServices.getDataProfile({
       signOut,
@@ -61,13 +62,13 @@ export const AuthProvider = ({ children }: Props) => {
     if (error) return;
 
     if (data) setUser(data);
-  }, [router.asPath, accessToken]);
+  }, [signOut]);
 
   useEffect(() => {
     if (router.asPath !== '/' && refreshToken) {
       userData();
     }
-  }, [router.asPath, refreshToken]);
+  }, [router.asPath, refreshToken, userData]);
   return (
     <AuthContext.Provider
       value={{

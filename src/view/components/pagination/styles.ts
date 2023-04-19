@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { skeleton } from '../styles/constants';
+import { backgroundShine } from '../styles/constants';
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -26,7 +26,7 @@ export const Paginator = styled.div<{ isLoading?: boolean }>`
       background: #ffffff;
       background: linear-gradient(110deg, #bababa 8%, #ffffff 18%, #bababa 33%);
       background-size: 200% 100%;
-      animation: 1.5s ${skeleton()} linear infinite;
+      animation: 1.5s ${backgroundShine} linear infinite;
       color: transparent;
       button,
       ul {
@@ -43,8 +43,8 @@ export const Paginator = styled.div<{ isLoading?: boolean }>`
     justify-content: center;
     align-items: center;
 
-    background: ${({ theme }) => theme.colors.primary.p800};
-    color: ${({ theme }) => theme.colors.neutral.n50};
+    background: ${({ theme }) => theme.colors.shades.white};
+    color: ${({ theme }) => theme.colors.primary.p900};
 
     border-radius: 50%;
     border: 0;
@@ -59,7 +59,7 @@ export const Paginator = styled.div<{ isLoading?: boolean }>`
 
     &:hover {
       background: ${({ theme }) => theme.colors.primary.p900};
-      color: ${({ theme }) => theme.colors.neutral.n50};
+      color: ${({ theme }) => theme.colors.shades.white};
     }
 
     &:disabled {
@@ -71,7 +71,7 @@ export const Paginator = styled.div<{ isLoading?: boolean }>`
   ul {
     height: 45px;
 
-    background: ${({ theme }) => theme.colors.primary.p800};
+    background: ${({ theme }) => theme.colors.shades.white};
 
     padding: 5px;
     gap: 10px;
@@ -104,7 +104,7 @@ export const Paginator = styled.div<{ isLoading?: boolean }>`
         cursor: pointer;
 
         background: transparent;
-        color: ${({ theme }) => theme.colors.neutral.n50};
+        color: ${({ theme }) => theme.colors.neutral.n800};
         font-weight: bold;
       }
 
@@ -112,7 +112,7 @@ export const Paginator = styled.div<{ isLoading?: boolean }>`
       &.on {
         background: ${({ theme }) => theme.colors.primary.p900};
         button {
-          color: ${({ theme }) => theme.colors.neutral.n50};
+          color: ${({ theme }) => theme.colors.shades.white};
         }
       }
     }

@@ -7,8 +7,7 @@ import { parseCookies } from 'nookies';
 
 import { KEYS } from '@/constants/keys';
 import { authServices } from '@/contexts/auth/services';
-import { useAuth } from '@/hooks/auth';
-import { useCookies } from '@/hooks/use-cookies';
+import { useCookies } from '@/hooks/cookies';
 import { createJWTCookie } from '@/utils';
 
 import { HttpDefaultHeaders, HttpParamsRequest, HttpResponse } from '../http';

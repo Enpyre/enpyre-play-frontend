@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 import { convertFont } from '@/utils';
 
-import { skeleton } from '../styles/constants';
+import { backgroundShine } from '../styles/constants';
 
 export const Wrapper = styled.table<{ isLoading?: boolean }>`
   width: 100%;
@@ -20,7 +20,7 @@ export const Wrapper = styled.table<{ isLoading?: boolean }>`
 
     tr {
       th {
-        color: ${({ theme }) => theme.colors.neutral.n50};
+        color: ${({ theme }) => theme.colors.blue.b300};
         text-transform: uppercase;
         font-size: ${convertFont.toRem(14)};
         font-weight: bold;
@@ -48,14 +48,14 @@ export const Wrapper = styled.table<{ isLoading?: boolean }>`
           width: 100%;
           border-radius: 2px;
           background-size: 200% 100%;
-          animation: 1.5s ${skeleton()} linear infinite;
+          animation: 1.5s ${backgroundShine} linear infinite;
           color: transparent;
           td {
             opacity: 0;
           }
         `}
       td {
-        color: ${({ theme }) => theme.colors.neutral.n50};
+        color: ${({ theme }) => theme.colors.shades.white};
         padding-top: 7px;
         padding-bottom: 7px;
 
@@ -68,7 +68,7 @@ export const Wrapper = styled.table<{ isLoading?: boolean }>`
         }
       }
       &:nth-child(even) {
-        background: ${({ theme }) => theme.colors.primary.p900};
+        background: ${({ theme }) => theme.colors.primary.p700};
         td {
           border-color: transparent;
         }

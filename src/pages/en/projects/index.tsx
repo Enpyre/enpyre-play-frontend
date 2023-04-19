@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 import { ProjectProvider } from '@/contexts/projects';
 import { useAuth } from '@/hooks/auth';
-import { useCookies } from '@/hooks/use-cookies';
+import { useCookies } from '@/hooks/cookies';
 import { Projects } from '@/view/environments/private/en-projects';
 
 export default function InitialEn() {

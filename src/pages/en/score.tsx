@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 import { ScoreProvider } from '@/contexts/scores';
 import { useAuth } from '@/hooks/auth';
-import { useCookies } from '@/hooks/use-cookies';
+import { useCookies } from '@/hooks/cookies';
 import { EnScore } from '@/view/environments/private/en-score';
 
 export default function Quizzes() {

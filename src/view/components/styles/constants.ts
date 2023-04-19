@@ -87,7 +87,7 @@ export const animation = (
   `;
 };
 
-const background = keyframes`
+export const backgroundShine = keyframes`
   to {
     background-position-x: -200%;
   }
@@ -96,7 +96,7 @@ const background = keyframes`
 export const skeleton = (color: 'primary' | 'neutrals' = 'neutrals') => css`
   color: transparent;
   background-size: 200% 100%;
-  animation: 1.5s ${background} linear infinite;
+  animation: 1.5s ${backgroundShine} linear infinite;
 
   ${color === 'neutrals' &&
   css`

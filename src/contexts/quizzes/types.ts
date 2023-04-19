@@ -17,24 +17,24 @@ export enum QuizType {
 }
 
 export type Answer = {
-  id: number;
+  id?: number;
   title: string;
-  content: string;
+  content?: string;
   is_correct: boolean;
-  score_amount: number;
-  position: number;
+  score_amount?: number;
+  position?: number;
 };
 
 export type Question = {
-  id: number;
+  id?: number;
   title: string;
-  content: string;
-  position: number;
+  content?: string;
+  position?: number;
   answers: Answer[];
 };
 
 export type Quiz = {
-  id: number;
+  id?: number;
   title: string;
   description?: string;
   quizz_type: QuizType;
@@ -49,12 +49,26 @@ export type QuizResponse = {
   results: Quiz[];
 };
 
+export type QuestionResponse = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Question[];
+};
+
+export type QuizFormData = {
+  title: string;
+  description?: string;
+  quizz_type: QuizType;
+  questions: Question[];
+};
+
 export type QuizContextData = {
   quizzes: QuizResponse | null;
-  quiz: Quiz | null;
+  quiz: QuestionResponse | null;
   fetchQuizzes: () => Promise<void>;
   fetchQuiz: (id: number) => Promise<void>;
-  createQuiz: (quiz: Quiz) => Promise<void>;
+  createQuiz: (quiz: Quiz) => Promise<HttpResponse>;
   updateQuiz: (quiz: Quiz) => Promise<void>;
   partialUpdateQuiz: (quiz: Partial<Quiz>) => Promise<void>;
   deleteQuiz: (id: number) => Promise<void>;
@@ -67,7 +81,7 @@ export interface IQuizServices {
   getQuiz: (
     id: number,
     { signOut }: ToFuncRequest,
-  ) => Promise<HttpResponse<Quiz>>;
+  ) => Promise<HttpResponse<QuestionResponse>>;
   createQuiz: (
     quiz: Quiz,
     { signOut }: ToFuncRequest,
@@ -75,11 +89,11 @@ export interface IQuizServices {
   updateQuiz: (
     quiz: Quiz,
     { signOut }: ToFuncRequest,
-  ) => Promise<HttpResponse<Quiz>>;
+  ) => Promise<HttpResponse<QuestionResponse>>;
   partialUpdateQuiz: (
     quiz: Partial<Quiz>,
     { signOut }: ToFuncRequest,
-  ) => Promise<HttpResponse<Quiz>>;
+  ) => Promise<HttpResponse<QuestionResponse>>;
   deleteQuiz: (
     id: number,
     { signOut }: ToFuncRequest,

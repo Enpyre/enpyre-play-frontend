@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
 import { useProjects } from '@/hooks/projects';
-import { Button } from '@/view/components/ui/button';
 import {
   CardList,
   ItemCard,
@@ -12,11 +11,11 @@ import {
 
 import { Header } from '../layout/header';
 import { PRIVATE_ROUTES } from '../paths.routes';
-import { ButtonWrapper, Container, Content } from './styles';
+import { Container, Content } from './styles';
 
 export const Projects: React.FC = () => {
   const { projects, fetchProjects } = useProjects();
-  const router = useRouter();
+  // const router = useRouter();
 
   useEffect(() => {
     fetchProjects();
@@ -27,12 +26,12 @@ export const Projects: React.FC = () => {
       <Header />
       <Container>
         <Content>
-          <ButtonWrapper>
+          {/* <ButtonWrapper>
             <Button
               title="Criar Projeto"
               onClick={() => router.push(PRIVATE_ROUTES.PROJECTS.CREATE)}
             />
-          </ButtonWrapper>
+          </ButtonWrapper> */}
           <CardList>
             {projects?.results.map((project) => (
               <ItemCard

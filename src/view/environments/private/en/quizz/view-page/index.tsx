@@ -1,10 +1,8 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { useQuizzes } from '@/hooks/quizzes';
 import { PageIdentification } from '@/view/components/page-identification';
-import { Button } from '@/view/components/ui/button';
 import {
   CardList,
   ItemCard,
@@ -18,7 +16,7 @@ import * as S from './styles';
 
 export const QuizzView = () => {
   const { fetchQuizzes, quizzes } = useQuizzes();
-  const router = useRouter();
+  // const router = useRouter();
 
   useEffect(() => {
     fetchQuizzes();
@@ -29,12 +27,12 @@ export const QuizzView = () => {
       <S.Container>
         <PageIdentification title="Responder Quizz" />
         <S.Content>
-          <S.ButtonWrapper>
+          {/* <S.ButtonWrapper>
             <Button
               title="Criar Quizz"
               onClick={() => router.push(PRIVATE_ROUTES.QUIZZES.CREATE)}
             />
-          </S.ButtonWrapper>
+          </S.ButtonWrapper> */}
           <CardList>
             {quizzes?.results.map((quiz) => (
               <ItemCard

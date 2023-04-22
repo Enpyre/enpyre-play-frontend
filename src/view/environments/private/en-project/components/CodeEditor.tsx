@@ -82,9 +82,9 @@ const CodeEditor = () => {
           <S.Button onClick={runCode} disabled={!pyodideLoaded}>
             Run
           </S.Button>
-          <S.Button onClick={handleSave} disabled={!pyodideLoaded}>
+          {/* <S.Button onClick={handleSave} disabled>
             Save
-          </S.Button>
+          </S.Button> */}
         </S.HorizontalSpace>
       </S.Space>
       <ToastContainer hideProgressBar theme="colored" />

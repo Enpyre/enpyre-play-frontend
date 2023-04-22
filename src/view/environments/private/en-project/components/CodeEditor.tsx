@@ -73,7 +73,7 @@ const CodeEditor = () => {
   };
 
   return (
-    <S.Card dark gridRowStart={1} gridRowEnd={3}>
+    <S.Card dark gridColumnStart={2} gridRowStart={1} gridRowEnd={3}>
       <S.Space>
         <S.EditorWrapper>
           <EnpyreEditor editorProps={editorProps} />

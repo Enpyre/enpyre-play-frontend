@@ -3,8 +3,7 @@ import '/node_modules/react-resizable/css/styles.css';
 
 import { PageIdentification } from '@/view/components/page-identification';
 
-// import { useEffect } from 'react';
-// import { useProjects } from '@/hooks/projects';
+import { Projects } from '../../en-projects';
 import { Header } from '../../layout/header';
 import * as S from './styles';
 
@@ -18,6 +17,7 @@ export const ProjectsPage = () => {
     <S.Wrapper>
       <Header />
       <PageIdentification title="Projetos" />
+      <Projects />
     </S.Wrapper>
   );
 };

@@ -15,7 +15,7 @@ const Output = () => {
   }, [output]);
 
   return (
-    <S.Card dark gridRowStart={3} gridColumnStart={2}>
+    <S.Card dark gridColumnStart={2} gridRowStart={3}>
       <S.CardTitle>Output</S.CardTitle>
       <S.Scrollable ref={scrollableRef}>
         {output.map((msg, index) => (

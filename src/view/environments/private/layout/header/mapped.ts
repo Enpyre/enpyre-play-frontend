@@ -1,15 +1,15 @@
 import { PRIVATE_ROUTES } from '../../paths.routes';
 
 export const menuList = [
-  {
-    id: 'code',
-    title: 'Codar',
-    href: PRIVATE_ROUTES.CODE,
-  },
+  // {
+  //   id: 'code',
+  //   title: 'Codar',
+  //   href: PRIVATE_ROUTES.CODE,
+  // },
   {
     id: 'projects',
     title: 'Projetos',
-    href: PRIVATE_ROUTES.PROJECTS,
+    href: PRIVATE_ROUTES.PROJECTS.VIEW,
   },
   {
     id: 'quiz',

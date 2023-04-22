@@ -1,23 +1,22 @@
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
 import { useProjects } from '@/hooks/projects';
-
-import { Header } from '../layout/header';
+import { Button } from '@/view/components/ui/button';
 import {
-  Button,
-  ButtonWrapper,
   CardList,
-  Container,
-  ContainerHeader,
-  Content,
   ItemCard,
   ItemDescription,
   ItemTitle,
-  Title,
-} from './styles';
+} from '@/view/components/ui/card-list';
+
+import { Header } from '../layout/header';
+import { PRIVATE_ROUTES } from '../paths.routes';
+import { ButtonWrapper, Container, Content } from './styles';
 
 export const Projects: React.FC = () => {
   const { projects, fetchProjects } = useProjects();
+  const router = useRouter();
 
   useEffect(() => {
     fetchProjects();
@@ -27,16 +26,18 @@ export const Projects: React.FC = () => {
     <>
       <Header />
       <Container>
-        <ContainerHeader>
-          <Title>Projetos</Title>
-        </ContainerHeader>
         <Content>
           <ButtonWrapper>
-            <Button href="/en/projects/create/">Novo Projeto</Button>
+            <Button
+              title="Criar Projeto"
+              onClick={() => router.push(PRIVATE_ROUTES.PROJECTS.CREATE)}
+            />
           </ButtonWrapper>
           <CardList>
             {projects?.results.map((project) => (
-              <ItemCard key={project.id} href={`/en/projects/${project.id}`}>
+              <ItemCard
+                href={`${PRIVATE_ROUTES.PROJECTS.VIEW}/${project.id}`}
+                key={project.id}>
                 <ItemTitle>{project.title}</ItemTitle>
                 <ItemDescription>
                   {project.description || 'Sem descrição'}

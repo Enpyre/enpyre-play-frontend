@@ -7,6 +7,9 @@ const nextConfig = {
   },
   images: {
     domains: ['avatars.githubusercontent.com', 'api.dicebear.com'],
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   async rewrites() {
     return [

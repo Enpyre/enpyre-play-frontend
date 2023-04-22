@@ -36,7 +36,7 @@ export const Content = styled.div`
 
     & > a {
       min-width: 200px;
-      background: ${({ theme }) => theme.colors.shades.white};
+      background: ${({ theme }) => theme.colors.dracula};
       color: ${({ theme }) => theme.colors.neutral.n800};
 
       border-radius: 6px;
@@ -56,7 +56,7 @@ export const Content = styled.div`
 
     .question {
       width: 100%;
-      background: ${({ theme }) => theme.colors.shades.white};
+      background: ${({ theme }) => theme.colors.dracula};
       padding: 12px 16px;
       border-radius: 8px;
 

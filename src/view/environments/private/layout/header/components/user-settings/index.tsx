@@ -30,11 +30,11 @@ export const UserSettings = () => {
     position: 'right',
     noUppercase: true,
     dropdown: [
-      {
-        name: 'Configurações',
-        variant: 'normal',
-        to: '/settings/profile',
-      },
+      // {
+      //   name: 'Configurações',
+      //   variant: 'normal',
+      //   to: '/settings/profile',
+      // },
       {
         name: loading ? 'Saindo...' : 'Sair',
         variant: 'normal',
@@ -42,6 +42,9 @@ export const UserSettings = () => {
       },
     ],
   };
+
+  console.log('user?.picture', user?.picture);
+
   return (
     <S.Wrapper>
       <S.CircleInitials>

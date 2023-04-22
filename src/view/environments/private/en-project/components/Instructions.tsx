@@ -17,7 +17,7 @@ const Instructions = () => {
 
   if (!project || !project.id) {
     return (
-      <S.Card dark gridRowStart={2} gridRowEnd={4}>
+      <S.Card dark gridColumnStart={1} gridRowStart={3}>
         <S.CardTitle>
           <S.StyledInput
             type="text"
@@ -38,7 +38,7 @@ const Instructions = () => {
   }
 
   return (
-    <S.Card dark gridRowStart={2} gridRowEnd={4}>
+    <S.Card dark gridColumnStart={1} gridRowStart={3}>
       <S.Space>
         <S.CardTitle>{project.title}</S.CardTitle>
         <Text>

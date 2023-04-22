@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import tw from 'tailwind-styled-components';
 
 import { theme } from '@/helpers/theme';
 
@@ -11,29 +12,46 @@ interface CardProps {
   scroll?: boolean;
 }
 
-export const Body = styled.div`
-  width: 100%;
-  padding: 1rem;
-  padding-top: 70px;
+// export const Body = styled.div`
+//   height: 100vh;
+//   width: 100vw;
+//   max-width: 100vw;
+//   padding: 1rem;
+//   padding-top: 70px;
+// `;
+
+export const Body = tw.div`
+  h-screen
+  w-screen
+  max-w-screen
+  p-1
+  pt-20
 `;
 
-export const GridLayout = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: minmax(400px, 1fr) 400px 800px 400px;
-  gap: 1rem;
+// export const GridLayout = styled.div`
+//   display: grid;
+//   grid-template-columns: 1fr;
+//   grid-template-rows: minmax(400px, 1fr) 400px 800px 400px;
+//   gap: 1rem;
 
-  @media (min-width: 768px) {
-    grid-template-columns: 800px minmax(800px, 1fr);
-    grid-template-rows: 400px 250px 300px;
-  }
+//   @media (min-width: 768px) {
+//     grid-template-columns: 800px minmax(800px, 1fr);
+//     grid-template-rows: 400px 250px 300px;
+//   }
+// `;
+
+export const GridLayout = tw.div`
+  h-full
+  grid
+  grid-cols-1
+  grid-rows-4
+  gap-1
+  md:grid-cols-2
+  md:grid-rows-3
+  md:gap-1
 `;
 
-export const Card = styled.div<CardProps>`
-  background: white;
-  padding: 1rem;
-  overflow: hidden;
-
+const _Card = styled.div<CardProps>`
   ${({ scroll }) => {
     return scroll
       ? css`
@@ -58,6 +76,13 @@ export const Card = styled.div<CardProps>`
         ${gridColumnEnd && `grid-column-end: ${gridColumnEnd};`}
       `}
   }
+`;
+
+export const Card = tw(_Card)`
+  bg-white
+  p-1
+  overflow-hidden
+  md:overflow-scroll
 `;
 
 export const Space = styled.div`

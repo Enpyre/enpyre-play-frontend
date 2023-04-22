@@ -33,20 +33,30 @@ export const QuizzViewQuestion = ({ id }: Props) => {
         <div className="questions">
           {quiz?.results.map((item, indexMain) => (
             <div className="question" key={item.id}>
-              <h3>{item.title}</h3>
-              <p>{item.content}</p>
+              <h1 className="mx-2 my-4 text-lg font-bold">{item.title}</h1>
 
-              <h4>Respostas</h4>
-              {item.answers.map((answer, index) => (
-                <div key={answer.id} className="answer">
-                  <h4>
-                    {index + 1}. {answer.title}
-                  </h4>
-                  {answer.content && <p>{answer.content}</p>}
-                </div>
-              ))}
+              <div className="flex w-full flex-col items-start justify-center">
+                <p className="mx-4 text-center">{item.content}</p>
+              </div>
 
-              <h4 className="user-answer">Qual(is) alternativa correta?</h4>
+              <div className="flex w-full flex-col items-start justify-center py-4">
+                <h2 className="text-center font-semibold">Resposta:</h2>
+
+                {item.answers.map((answer, index) => (
+                  <div
+                    key={answer.id}
+                    className="justify-censter flex w-full flex-col items-start px-4">
+                    <h4 className="my-2 text-center font-semibold text-blue-500">
+                      {index + 1}. {answer.title}
+                    </h4>
+                    {answer.content && <p className="mx-4">{answer.content}</p>}
+                  </div>
+                ))}
+              </div>
+
+              <h4 className="user-answer my-2 text-center font-semibold text-blue-500">
+                Qual alternativa correta?
+              </h4>
               <ButtonGroup
                 name={`quizz_answer[${indexMain}]`}
                 notForm

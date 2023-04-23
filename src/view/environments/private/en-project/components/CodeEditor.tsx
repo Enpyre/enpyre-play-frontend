@@ -1,9 +1,7 @@
-import 'react-toastify/dist/ReactToastify.css';
-
 import { EnpyreEditor, useCode, usePyodide } from 'enpyre';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import { AuthContext } from '@/contexts/auth';
 import { ProjectContext } from '@/contexts/projects';
@@ -21,6 +19,7 @@ const CodeEditor = () => {
     createProject,
   } = useContext(ProjectContext);
   const { user } = useContext(AuthContext);
+  const router = useRouter();
 
   useEffect(() => {
     setCode(projectSolution ? projectSolution.code : project?.code);
@@ -49,8 +48,8 @@ const CodeEditor = () => {
 
     const result = await createProject({ ...project, code }, user);
     if (result?.id) {
-      await Router.push(`/en/projects/${result.id}`);
-      Router.reload();
+      await router.push(`/en/projects/${result.id}`);
+      router.reload();
       toast.success('Project created successfully');
     }
   };
@@ -85,7 +84,6 @@ const CodeEditor = () => {
           <S.Button onClick={handleSave}>Save</S.Button>
         </S.HorizontalSpace>
       </S.Space>
-      <ToastContainer hideProgressBar theme="colored" />
     </S.Card>
   );
 };

@@ -5,7 +5,7 @@ import { convertFont } from '@/utils';
 export const LabelField = styled.label`
   font-size: ${convertFont.toRem(14)};
   margin-bottom: 4px;
-  color: ${({ theme }) => theme.colors.primary.p900};
+  color: ${({ theme }) => theme.colors.primary.p200};
   padding-left: 8px;
 `;
 
@@ -73,7 +73,7 @@ export const ContainerForm = styled.div<{
           align-items: center;
           svg {
             font-size: 62px;
-            color: ${({ theme }) => theme.colors.primary.p900};
+            color: ${({ theme }) => theme.colors.primary.p200};
             animation: ${rotate} 1.5s infinite ease;
           }
         `
@@ -216,24 +216,24 @@ export const Button = styled.button`
 
   font-size: ${convertFont.toRem(14)};
   text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.primary.p900};
-  border: 1px solid ${({ theme }) => theme.colors.primary.p900};
+  color: ${({ theme }) => theme.colors.primary.p200};
+  border: 1px solid ${({ theme }) => theme.colors.primary.p200};
   background: transparent;
   cursor: pointer;
 
   &:hover {
-    background: ${({ theme }) => theme.colors.primary.p900};
+    background: ${({ theme }) => theme.colors.primary.p200};
     color: ${({ theme }) => theme.colors.shades.white};
   }
 
   &:disabled {
-    color: ${({ theme }) => theme.colors.neutral.n500};
-    border-color: ${({ theme }) => theme.colors.neutral.n500};
+    color: ${({ theme }) => theme.colors.neutral.n100};
+    border-color: ${({ theme }) => theme.colors.neutral.n100};
     cursor: not-allowed;
 
     &:hover {
-      color: ${({ theme }) => theme.colors.neutral.n500};
-      border-color: ${({ theme }) => theme.colors.neutral.n500};
+      color: ${({ theme }) => theme.colors.neutral.n100};
+      border-color: ${({ theme }) => theme.colors.neutral.n100};
 
       background: transparent;
     }

@@ -1,7 +1,9 @@
 import arrayMutators from 'final-form-arrays';
+import { useRouter } from 'next/router';
 import { CircleNotch, TextAa } from 'phosphor-react';
 import { useEffect, useState } from 'react';
 import { Form } from 'react-final-form';
+import { toast } from 'react-toastify';
 
 import { Quiz, QuizFormData } from '@/contexts/quizzes/types';
 import { useAuth } from '@/hooks/auth';
@@ -26,6 +28,7 @@ export const CreateQuizzPage = () => {
     send: false,
     text: 'Formulário não enviado',
   });
+  const router = useRouter();
 
   const handleSubmit = async (dataForm: QuizFormData) => {
     setStates((old) => {
@@ -50,6 +53,7 @@ export const CreateQuizzPage = () => {
               title: answer.title,
               content: answer.content,
               is_correct: answer.is_correct,
+              score_amount: answer.is_correct ? 10 : 0,
             };
           }),
         };
@@ -70,6 +74,8 @@ export const CreateQuizzPage = () => {
     setStates((old) => {
       return { ...old, loading: false, send: true, text: 'Perguntas enviadas' };
     });
+    router.push('/en/quizzes');
+    toast.success('Quizz criado com sucesso!');
   };
 
   useEffect(() => {
@@ -113,14 +119,20 @@ export const CreateQuizzPage = () => {
                       name="quizz_type"
                       items={[
                         { title: 'Multipla Escolha', value: 'multiple_choice' },
-                        { title: 'Verdadeiro ou Falso', value: 'true_false' },
+                        {
+                          title: 'Verdadeiro ou Falso',
+                          value: 'true_false',
+                          disabled: true,
+                        },
                         {
                           title: 'Preencha o espaço em branco',
                           value: 'fill_in_the_blank',
+                          disabled: true,
                         },
                         {
                           title: 'Multiplas respostas',
                           value: 'multiple_answer',
+                          disabled: true,
                         },
                       ]}
                     />
@@ -129,7 +141,24 @@ export const CreateQuizzPage = () => {
                     <MultipleChoice />
                   )}
                   <GroupForm minHeight={80}>
-                    <Button>Enviar</Button>
+                    <Button
+                      disabled={
+                        !values.title ||
+                        !values.quizz_type ||
+                        !values.questions?.length ||
+                        values.questions.some((item) => !item.title) ||
+                        values.questions.some(
+                          (item) => !item.answers?.length,
+                        ) ||
+                        values.questions.some((item) =>
+                          item.answers?.some((answer) => !answer.title),
+                        ) ||
+                        values.questions.some((item) =>
+                          item.answers?.every((answer) => !answer.is_correct),
+                        )
+                      }>
+                      Enviar
+                    </Button>
                   </GroupForm>
                 </form>
               )}

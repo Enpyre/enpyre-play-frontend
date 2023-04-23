@@ -1,7 +1,9 @@
 import '@/view/styles.global.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { ToastContainer } from 'react-toastify';
 import { ThemeProvider } from 'styled-components';
 
 import { AuthProvider } from '@/contexts/auth';
@@ -25,6 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </AuthProvider>
       </ToggleThemeProvider>
+      <ToastContainer theme="dark" />
     </ThemeProvider>
   );
 }

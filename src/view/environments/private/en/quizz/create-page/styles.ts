@@ -33,7 +33,7 @@ export const Container = styled.div<{ isLoading?: boolean }>`
 
   padding: 40px 28px;
 
-  background: ${({ theme }) => theme.colors.shades.white};
+  background: ${({ theme }) => theme.colors.dracula};
 
   border-radius: 12px;
 

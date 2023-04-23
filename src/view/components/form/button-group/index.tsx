@@ -86,6 +86,7 @@ export const ButtonGroup = ({
                 onChange={handleChange}
                 id={name}
                 checked={item.checked}
+                disabled={item.disabled}
               />
             )}
             {!notForm && (
@@ -104,6 +105,7 @@ export const ButtonGroup = ({
                       id={item.value}
                       value={item.value}
                       checked={item.checked}
+                      disabled={item.disabled}
                     />
                     {touched && errors && errors[name] && touched[name] && (
                       <ErrorField>{errors[name]}</ErrorField>
@@ -112,7 +114,11 @@ export const ButtonGroup = ({
                 )}
               </Field>
             )}
-            <label htmlFor={item.value as string}>{item.title}</label>
+            <label
+              className={item.disabled ? '!bg-gray-500 !text-gray-200' : ''}
+              htmlFor={item.value as string}>
+              {item.title}
+            </label>
           </fieldset>
         ))}
       </div>

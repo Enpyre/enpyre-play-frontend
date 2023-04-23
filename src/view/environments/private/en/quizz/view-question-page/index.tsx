@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import { useQuizzes } from '@/hooks/quizzes';
 import { ButtonGroup } from '@/view/components/form/button-group';
@@ -66,10 +67,8 @@ export const QuizzViewQuestion = ({ id }: Props) => {
   const handleSubmit = useCallback(async () => {
     const answer_ids = userAnswersState?.map((answer) => answer.answer_id);
     await submitUserAnswers(Number(id), answer_ids);
+    toast.success('Respostas enviadas com sucesso!');
   }, [submitUserAnswers, userAnswersState, id]);
-
-  console.log('quiz', quiz);
-  console.log('userAnswersState', userAnswersState);
 
   return (
     <S.Wrapper>

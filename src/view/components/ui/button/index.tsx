@@ -22,6 +22,7 @@ type Props = {
     | TypeModal;
   type?: 'button' | 'submit' | 'reset';
   onClick?: React.MouseEventHandler;
+  href?: string;
 };
 
 /**
@@ -47,11 +48,13 @@ export const Button = ({
   disabled,
   type = 'button',
   onClick,
+  href,
 }: Props) => {
   return (
     <>
       {!description ? (
         <Wrapper
+          href={href}
           height={height}
           color={color}
           outline={variant === 'outline' || outline}
@@ -69,6 +72,7 @@ export const Button = ({
           side="top"
           trigger={
             <Wrapper
+              href={href}
               height={height}
               color={color}
               outline={variant === 'outline' || outline}

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const Wrapper = styled.button<{
+export const Wrapper = styled.a<{
   height: number;
   outline?: boolean;
   circle?: boolean;

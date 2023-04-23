@@ -43,8 +43,6 @@ export const UserSettings = () => {
     ],
   };
 
-  console.log('user?.picture', user?.picture);
-
   return (
     <S.Wrapper>
       <S.CircleInitials>

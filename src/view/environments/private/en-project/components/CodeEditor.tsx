@@ -26,8 +26,6 @@ const CodeEditor = () => {
     setCode(projectSolution ? projectSolution.code : project?.code);
   }, [setCode, projectSolution, project]);
 
-  const notify = () => toast.success('Project updated successfully');
-
   const onSaveProject = async () => {
     if (!project || !project.id) return;
 
@@ -38,7 +36,7 @@ const CodeEditor = () => {
       const projectSolution: ProjectSolution = { code, project: project.id };
       await createProjectSolution(projectSolution, project.id);
     }
-    notify();
+    toast.success('Project updated successfully');
   };
 
   const onCreateProject = async () => {
@@ -49,9 +47,11 @@ const CodeEditor = () => {
       return;
     }
 
-    const result = await createProject(project, user);
+    const result = await createProject({ ...project, code }, user);
     if (result?.id) {
       await Router.push(`/en/projects/${result.id}`);
+      Router.reload();
+      toast.success('Project created successfully');
     }
   };
 
@@ -82,9 +82,7 @@ const CodeEditor = () => {
           <S.Button onClick={runCode} disabled={!pyodideLoaded}>
             Run
           </S.Button>
-          {/* <S.Button onClick={handleSave} disabled>
-            Save
-          </S.Button> */}
+          <S.Button onClick={handleSave}>Save</S.Button>
         </S.HorizontalSpace>
       </S.Space>
       <ToastContainer hideProgressBar theme="colored" />

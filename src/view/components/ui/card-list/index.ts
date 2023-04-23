@@ -20,6 +20,23 @@ export const ItemCard = styled(Link)`
   }
 `;
 
+export const ItemCardLegacy = styled.a`
+  background: ${theme.colors.dracula};
+  padding: 20px;
+  border-radius: 15px;
+  width: 425px;
+  height: 180px;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  margin-right: 1rem;
+  margin-top: 1rem;
+
+  &:hover {
+    background: #626674;
+  }
+`;
+
 export const CardList = styled.div`
   display: flex;
   flex-direction: row;

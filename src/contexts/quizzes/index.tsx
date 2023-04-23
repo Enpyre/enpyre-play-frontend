@@ -9,6 +9,8 @@ import {
   Quiz,
   QuizContextData,
   QuizResponse,
+  UserAnswer,
+  UserAnswerResponse,
 } from './types';
 
 export const QuizContext = createContext<QuizContextData>(
@@ -18,6 +20,9 @@ export const QuizContext = createContext<QuizContextData>(
 export const QuizProvider = ({ children }: Props) => {
   const [quizzes, setQuizzes] = useState<QuizResponse | null>(null);
   const [quiz, setQuiz] = useState<QuestionResponse | null>(null);
+  const [userAnswers, setUserAnswers] = useState<UserAnswerResponse | null>(
+    null,
+  );
   const { signOut } = useAuth();
 
   const fetchQuizzes = useCallback(async () => {
@@ -89,6 +94,33 @@ export const QuizProvider = ({ children }: Props) => {
     [signOut],
   );
 
+  const fetchUserAnswers = useCallback(
+    async (quiz_id: number) => {
+      const { data, error } = await quizService.listUserAnswers(quiz_id, {
+        signOut,
+      });
+      if (error) return;
+      setUserAnswers(data);
+    },
+    [signOut],
+  );
+
+  const submitUserAnswers = useCallback(
+    async (quiz_id: number, answer_ids: number[]) => {
+      const response = await Promise.all(
+        answer_ids.map(async (answer_id) => {
+          const resp = await quizService.submitUserAnswer(quiz_id, answer_id, {
+            signOut,
+          });
+          return resp;
+        }),
+      );
+      fetchUserAnswers(quiz_id);
+      return response;
+    },
+    [signOut, fetchUserAnswers],
+  );
+
   return (
     <QuizContext.Provider
       value={{
@@ -100,6 +132,9 @@ export const QuizProvider = ({ children }: Props) => {
         updateQuiz,
         partialUpdateQuiz,
         deleteQuiz,
+        userAnswers,
+        fetchUserAnswers,
+        submitUserAnswers,
       }}>
       {children}
     </QuizContext.Provider>

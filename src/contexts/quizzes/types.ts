@@ -56,6 +56,21 @@ export type QuestionResponse = {
   results: Question[];
 };
 
+export type UserAnswer = {
+  id?: number;
+  answer_id: number;
+  user_id?: number;
+  quizz_id?: number;
+  question_id?: number;
+};
+
+export type UserAnswerResponse = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: UserAnswer[];
+};
+
 export type QuizFormData = {
   title: string;
   description?: string;
@@ -66,12 +81,18 @@ export type QuizFormData = {
 export type QuizContextData = {
   quizzes: QuizResponse | null;
   quiz: QuestionResponse | null;
+  userAnswers: UserAnswerResponse | null;
   fetchQuizzes: () => Promise<void>;
   fetchQuiz: (id: number) => Promise<void>;
   createQuiz: (quiz: Quiz) => Promise<HttpResponse>;
   updateQuiz: (quiz: Quiz) => Promise<void>;
   partialUpdateQuiz: (quiz: Partial<Quiz>) => Promise<void>;
   deleteQuiz: (id: number) => Promise<void>;
+  fetchUserAnswers: (quiz_id: number) => Promise<void>;
+  submitUserAnswers: (
+    quiz_id: number,
+    answer_id: number[],
+  ) => Promise<HttpResponse<UserAnswer>[]>;
 };
 
 export interface IQuizServices {
@@ -98,4 +119,13 @@ export interface IQuizServices {
     id: number,
     { signOut }: ToFuncRequest,
   ) => Promise<HttpResponse<unknown>>;
+  listUserAnswers: (
+    quiz_id: number,
+    { signOut }: ToFuncRequest,
+  ) => Promise<HttpResponse<UserAnswerResponse>>;
+  submitUserAnswer: (
+    quiz_id: number,
+    answer_id: number,
+    { signOut }: ToFuncRequest,
+  ) => Promise<HttpResponse<UserAnswer>>;
 }

@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { useQuizzes } from '@/hooks/quizzes';
 import { ButtonGroup } from '@/view/components/form/button-group';
@@ -14,12 +14,63 @@ export type Props = {
   id: string;
 };
 export const QuizzViewQuestion = ({ id }: Props) => {
-  const { fetchQuiz, quiz } = useQuizzes();
+  const { fetchQuiz, quiz, fetchUserAnswers, userAnswers, submitUserAnswers } =
+    useQuizzes();
+  const [userAnswersState, setUserAnswersState] = useState(
+    userAnswers?.results || [],
+  );
   const router = useRouter();
 
   useEffect(() => {
     fetchQuiz(Number(id));
   }, [fetchQuiz, id]);
+
+  useEffect(() => {
+    fetchUserAnswers(Number(id));
+  }, [fetchUserAnswers, id]);
+
+  useEffect(() => {
+    setUserAnswersState(userAnswers?.results || []);
+  }, [userAnswers]);
+
+  const handleAnswerSelected = useCallback(
+    (question_id: number | undefined, value: string) => {
+      setUserAnswersState((oldState) => {
+        const answered = oldState?.find(
+          (answer) => !!question_id && answer.question_id === question_id,
+        );
+        if (answered?.id) return oldState;
+        if (answered) {
+          return oldState?.map((answer) => {
+            if (answer.question_id === question_id) {
+              return {
+                ...answer,
+                answer_id: Number(value),
+              };
+            }
+            return answer;
+          });
+        }
+        return [
+          ...oldState,
+          {
+            question_id,
+            answer_id: Number(value),
+          },
+        ];
+      });
+    },
+    [],
+  );
+
+  const handleSubmit = useCallback(async () => {
+    const answer_ids = userAnswersState?.map((answer) => answer.answer_id);
+    await submitUserAnswers(Number(id), answer_ids);
+  }, [submitUserAnswers, userAnswersState, id]);
+
+  console.log('quiz', quiz);
+  console.log('userAnswersState', userAnswersState);
+
   return (
     <S.Wrapper>
       <Header />
@@ -60,16 +111,38 @@ export const QuizzViewQuestion = ({ id }: Props) => {
               <ButtonGroup
                 name={`quizz_answer[${indexMain}]`}
                 notForm
-                items={item.answers.map((answers, index) => {
+                value={String(
+                  userAnswersState?.find(
+                    (user_answer) => user_answer.question_id === item.id,
+                  )?.answer_id || '',
+                )}
+                items={item.answers.map((answer, index) => {
                   return {
                     title: String(index + 1),
-                    value: String(answers.id),
+                    value: String(answer.id),
+                    checked: !!userAnswersState?.find(
+                      (user_answer) => user_answer.answer_id === answer.id,
+                    ),
+                    disabled: !!userAnswersState?.find(
+                      (user_answer) =>
+                        user_answer.answer_id === answer.id && !!user_answer.id,
+                    ),
                   };
                 })}
+                onChangeValue={(value) => handleAnswerSelected(item.id, value)}
               />
             </div>
           ))}
         </div>
+
+        <Button
+          title="Enviar Respostas"
+          onClick={handleSubmit}
+          disabled={
+            userAnswersState.filter((a) => !a.id).length !==
+            quiz?.results.length
+          }
+        />
       </S.Content>
     </S.Wrapper>
   );

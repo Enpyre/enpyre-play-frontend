@@ -159,10 +159,7 @@ export const Wrapper = styled.a<{
   ${({ disabled }) =>
     disabled &&
     css`
-      &,
       &:hover {
-        background: ${({ theme }) => theme.colors.neutral.n300};
-        border-color: ${({ theme }) => theme.colors.neutral.n300};
         color: ${({ theme }) => theme.colors.neutral.n200};
         cursor: not-allowed;
       }

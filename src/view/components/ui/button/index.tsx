@@ -61,7 +61,7 @@ export const Button = ({
           circle={circle}
           disabled={disabled ?? false}
           type={type}
-          onClick={onClick}>
+          onClick={disabled ? undefined : onClick}>
           <i>{icon}</i>
           {title}
         </Wrapper>
@@ -79,7 +79,7 @@ export const Button = ({
               circle={circle}
               disabled={disabled ?? false}
               type={type}
-              onClick={onClick}>
+              onClick={disabled ? undefined : onClick}>
               <i>{icon}</i>
               {title}
             </Wrapper>

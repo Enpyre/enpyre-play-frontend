@@ -51,6 +51,9 @@ export const ButtonGroup = ({
 }: Props) => {
   const [valueState, setValueState] = useState(value);
 
+  console.log('value', value);
+  console.log('button items', items);
+
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const val = event.target.value;
@@ -76,13 +79,13 @@ export const ButtonGroup = ({
           <fieldset key={item.value as string}>
             {notForm && (
               <input
+                {...rest}
                 name={name}
                 type="radio"
                 value={item.value}
                 onChange={handleChange}
                 id={name}
-                checked={item.value === valueState}
-                {...rest}
+                checked={item.checked}
               />
             )}
             {!notForm && (
@@ -91,7 +94,8 @@ export const ButtonGroup = ({
                 name={name}
                 id={item.value}
                 value={item.value}
-                type="radio">
+                type="radio"
+                checked={item.checked}>
                 {({ input }) => (
                   <>
                     <input
@@ -99,6 +103,7 @@ export const ButtonGroup = ({
                       {...rest}
                       id={item.value}
                       value={item.value}
+                      checked={item.checked}
                     />
                     {touched && errors && errors[name] && touched[name] && (
                       <ErrorField>{errors[name]}</ErrorField>
